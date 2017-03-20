@@ -1,0 +1,12 @@
+path=/Users/pedrosalazar/Desktop/Universidad/2017-01/Sistemas Transaccionales/Sistemas-Transaccionales/java-server-master/WebContent/WEB-INF/lib/jackson-all-1.7.5.jar
+size=952573
+archive=0
+path=/Users/pedrosalazar/Desktop/Universidad/2017-01/Sistemas Transaccionales/Sistemas-Transaccionales/java-server-master/WebContent/WEB-INF/lib/javax.ws.rs.jar
+size=110253
+archive=0
+path=/Users/pedrosalazar/Desktop/Universidad/2017-01/Sistemas Transaccionales/Sistemas-Transaccionales/java-server-master/WebContent/WEB-INF/lib/ojdbc6.jar
+size=2739670
+archive=0
+path=/Users/pedrosalazar/Desktop/Universidad/2017-01/Sistemas Transaccionales/Sistemas-Transaccionales/java-server-master/WebContent/WEB-INF/lib/javax.servlet.jar
+size=132002
+archive=0

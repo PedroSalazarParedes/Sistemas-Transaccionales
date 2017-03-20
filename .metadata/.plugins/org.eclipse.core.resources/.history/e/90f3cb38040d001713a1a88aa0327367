@@ -1,0 +1,5 @@
+package rest.copy;
+
+public enum rest {
+
+}
