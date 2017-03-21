@@ -2,10 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
-import vos.Espectaculo;
 
 public class EspectaculoDAO {
 
@@ -30,20 +27,7 @@ public class EspectaculoDAO {
 				}
 		}
 	}
-	 public void addEspectaculo(Espectaculo e) throws SQLException,Exception{
-		 
-		 String sql = "ACÁ VA LA SENTENCIA";
-		 
-		 //acá hay que unir la sentencia con la info de el espectaculo que le pasan por parametro
-		 //como poniendo sql += e.getId() + ",'" etc etc
-		 
-
-			PreparedStatement prepStmt = connection.prepareStatement(sql);
-			resources.add(prepStmt);
-			prepStmt.executeQuery();
-
-		 
-	 }
+	
 	
 	
 

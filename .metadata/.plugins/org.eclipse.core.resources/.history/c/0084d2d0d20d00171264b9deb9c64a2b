@@ -34,8 +34,6 @@ import vos.ListaVideos;
  * @author Juan
  */
 @Path("videos")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class VideoAndesVideosServices {
 
 	// Servicios REST tipo GET:

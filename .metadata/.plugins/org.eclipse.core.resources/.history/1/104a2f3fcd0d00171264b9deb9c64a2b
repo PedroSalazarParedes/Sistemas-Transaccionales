@@ -1,0 +1,49 @@
+package vos;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import org.codehaus.jackson.annotate.*;
+
+@Entity
+public class Espectaculo {
+	
+	@Id
+	@GeneratedValue
+	@JsonProperty(value = "id")
+	private Long id;
+	
+	@JsonProperty(value = "nombre")
+	private String nombre;
+	
+	@JsonProperty(value = "duracion")
+	private Integer duracion;
+	
+	@JsonProperty(value = "costo")
+	private Double costo;
+	
+	@JsonProperty(value = "participacion")
+	private int participacion;
+	
+	@JsonProperty(value = "descripcion")
+	private String descripcion;
+	
+	@JsonProperty(value = "publicoObjetivo")
+	private String publicoObjetivo;
+	
+	@JsonProperty(value = "idioma")
+	private String idioma;
+	
+	@JsonProperty(value = "tipoTraduccion")
+	private String tipoTraduccion;
+	
+	@JsonProperty(value = "requerimientosTecnicos")
+	private String requerimientosTecnicos;
+	
+	@JsonProperty(value = "idCategoria")
+	private Long idCategoria;
+	
+
+	
+
+}
