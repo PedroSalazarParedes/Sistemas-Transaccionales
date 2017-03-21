@@ -1,149 +1,294 @@
 package vos;
 
-
 import org.codehaus.jackson.annotate.*;
-public class Espectaculo {
-	
 
-	@JsonProperty(value = "id")
+/**
+ * Clase que representa un Espectaculo
+ * @author Mariana
+ */
+public class Espectaculo 
+{
+////Atributos
+
+	/**
+	 * Id del espectaculo
+	 */
+	@JsonProperty(value="id")
 	private Long id;
-	
-	@JsonProperty(value = "nombre")
-	private String nombre;
-	
-	@JsonProperty(value = "duracion")
-	private Integer duracion;
-	
-	@JsonProperty(value = "costo")
-	private Double costo;
-	
-	@JsonProperty(value = "participacion")
-	private int participacion;
-	
-	@JsonProperty(value = "descripcion")
-	private String descripcion;
-	
-	@JsonProperty(value = "publicoObjetivo")
-	private String publicoObjetivo;
-	
-	@JsonProperty(value = "idioma")
-	private String idioma;
-	
-	@JsonProperty(value = "tipoTraduccion")
-	private String tipoTraduccion;
-	
-	@JsonProperty(value = "requerimientosTecnicos")
-	private String requerimientosTecnicos;
-	
-	@JsonProperty(value = "idCategoria")
-	private Long idCategoria;
 
-	public Espectaculo(Long id, String nombre, Integer duracion, Double costo,
-			int participacion, String descripcion, String publicoObjetivo,
-			String idioma, String tipoTraduccion,
-			String requerimientosTecnicos, Long idCategoria) {
+	/**
+	 * Nombre del espectaculo
+	 */
+	@JsonProperty(value="name")
+	private String name;
+
+	/**
+	 * Duración en minutos del espectaculo
+	 */
+	@JsonProperty(value="duration")
+	private int duration;
+	
+	/**
+	 * Costo de realizaci�n del espectaculo
+	 */
+	@JsonProperty(value="cost")
+	private double cost;
+
+	/**
+	 * Participaci�n del p�blico en el espect�culo
+	 */
+	@JsonProperty(value="participation")
+	private int participation;
+
+	
+	/**
+	 * Descripci�n del espectaculo
+	 */
+	@JsonProperty(value="description")
+	private String description;
+
+	/**
+	 * Publico objetivo del espectaculo
+	 */
+	@JsonProperty(value="objetivo")
+	private String objetivo;
+
+	/**
+	 * Idioma del espectaculo
+	 */
+	@JsonProperty(value="idioma")
+	private String idioma;
+
+	/**
+	 * Tipo de traducci�n del espectaculo
+	 */
+	@JsonProperty(value="traduccion")
+	private String traduccion;
+
+	/**
+	 * Requerimientos t�cnicos del espectaculo
+	 */
+	@JsonProperty(value="reqtecnicos")
+	private String reqtecnicos;
+
+	/**
+	 * Id de la categoria del espectaculo
+	 */
+	@JsonProperty(value="idcategoria")
+	private Long idcategoria;
+
+
+	/**
+	 * Método constructor de la clase espectaculo
+	 * <b>post: </b> Crea el espectaculo con los valores que entran como parámetro
+	 * @param id - Id del video.
+	 * @param name - Nombre del video. name != null
+	 * @param duration - Duración en minutos del video.
+	 */
+	public Espectaculo(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="duration") int duration,@JsonProperty(value="cost") double cost, @JsonProperty(value="participation") int participation,
+			@JsonProperty(value="description") String description, @JsonProperty(value="objetivo") String objetivo, @JsonProperty(value="idioma") String idioma, @JsonProperty(value="traduccion") String traduccion, 
+			@JsonProperty(value="reqtecnicos") String reqtecnicos, @JsonProperty(value="idcategoria") Long idcategoria) {
+		super();
 		this.id = id;
-		this.nombre = nombre;
-		this.duracion = duracion;
-		this.costo = costo;
-		this.participacion = participacion;
-		this.descripcion = descripcion;
-		this.publicoObjetivo = publicoObjetivo;
+		this.name = name;
+		this.duration = duration;
+		this.cost = cost;
+		this.participation = participation;
+		this.description = description;
+		this.objetivo = objetivo;
 		this.idioma = idioma;
-		this.tipoTraduccion = tipoTraduccion;
-		this.requerimientosTecnicos = requerimientosTecnicos;
-		this.idCategoria = idCategoria;
+		this.traduccion = traduccion;
+		this.reqtecnicos = reqtecnicos;
+		this.idcategoria = idcategoria;
+	}
+	
+	/**
+	 * Método getter del atributo duration
+	 * @return duración del espectaculo en minutos
+	 */
+	public int getDuration() {
+		return duration;
 	}
 
+	/**
+	 * Método setter del atributo duration <b>post: </b> La duración del video
+	 * ha sido cambiado con el valor que entra como parámetro
+	 * @param duration - Duración en minutos del espectaculo.
+	 */
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	/**
+	 * Método getter del atributo id
+	 * @return id del espectaculo
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Método setter del atributo id <b>post: </b> El id del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param id - Id del espectaculo
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getNombre() {
-		return nombre;
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public Double getCost() {
+		return cost;
 	}
 
-	public Integer getDuracion() {
-		return duracion;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public int getParticipation() {
+		return participation;
 	}
 
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setParticipation(int participation) {
+		this.participation = participation;
+	}
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public String getDescription() {
+		return description;
 	}
 
-	public Double getCosto() {
-		return costo;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public String getObjetivo() {
+		return objetivo;
 	}
 
-	public void setCosto(Double costo) {
-		this.costo = costo;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
 	}
-
-	public int getParticipacion() {
-		return participacion;
-	}
-
-	public void setParticipacion(int participacion) {
-		this.participacion = participacion;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getPublicoObjetivo() {
-		return publicoObjetivo;
-	}
-
-	public void setPublicoObjetivo(String publicoObjetivo) {
-		this.publicoObjetivo = publicoObjetivo;
-	}
-
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
 	public String getIdioma() {
 		return idioma;
 	}
 
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
-
-	public String getTipoTraduccion() {
-		return tipoTraduccion;
+	
+	
+	 /** Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public String getTraduccion() {
+		return traduccion;
 	}
 
-	public void setTipoTraduccion(String tipoTraduccion) {
-		this.tipoTraduccion = tipoTraduccion;
-	}
-
-	public String getRequerimientosTecnicos() {
-		return requerimientosTecnicos;
-	}
-
-	public void setRequerimientosTecnicos(String requerimientosTecnicos) {
-		this.requerimientosTecnicos = requerimientosTecnicos;
-	}
-
-	public Long getIdCategoria() {
-		return idCategoria;
-	}
-
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setTraduccion(String traduccion) {
+		this.traduccion = traduccion;
 	}
 	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public String getReqtecnicos() {
+		return reqtecnicos;
+	}
 
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setReqtecnicos(String reqtecnicos) {
+		this.reqtecnicos = reqtecnicos;
+	}
+	/**
+	
+	/**
+	 * Método getter del atributo name
+	 * @return nombre del espectaculo
+	 */
+	public Long getIdcategoria() {
+		return idcategoria;
+	}
+
+	/**
+	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
+	 * cambiado con el valor que entra como parámetro
+	 * @param name - Nombre del espectaculo
+	 */
+	public void setIdcategoria(Long idcategoria) {
+		this.idcategoria = idcategoria;
+	}
 	
 
 }

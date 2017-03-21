@@ -1,19 +1,18 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.CompaniaTeatro;
-import vos.Espectaculo;
 
-public class EspectaculoDAO {
+import vos.Usuario;
+
+public class UsuarioDAO {
 
 	private ArrayList<Object> resources;
 	private Connection connection;
 
-	public EspectaculoDAO() {
+	public UsuarioDAO() {
 		resources = new ArrayList<Object>();
 	}
 	
@@ -40,20 +39,13 @@ public class EspectaculoDAO {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addEspectaculo(Espectaculo espectaculo) throws SQLException, Exception {
+	public void addUsuario(Usuario usuario) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ESPECTACULO VALUES (";
-		sql += espectaculo.getId() + ",'";
-		sql += espectaculo.getName() + "',";
-		sql += espectaculo.getDuration() + ",";
-		sql += espectaculo.getCost() + ",'";
-		sql += espectaculo.getParticipation() + "','";
-		sql += espectaculo.getDescription() + "','";
-		sql += espectaculo.getObjetivo() + "','";
-		sql += espectaculo.getIdioma() + "','";
-		sql += espectaculo.getTraduccion() + "','";
-		sql += espectaculo.getReqtecnicos() + "',";
-		sql += espectaculo.getIdcategoria() + ")";
+		String sql = "INSERT INTO USUARIO VALUES (";
+		sql += usuario.getId() + ",'";
+		sql += usuario.getName() + "','";
+		sql += usuario.getEmail() + "','";
+		sql += usuario.getRol() + "')";
 		
 		
 
@@ -65,19 +57,6 @@ public class EspectaculoDAO {
 
 	}
 	
-	public void addRealizadoPor(Espectaculo espe, CompaniaTeatro comp) throws SQLException, Exception {
 
-		String sql = "INSERT INTO REALIZADO_POR VALUES (";
-		sql += espe.getId() + ",";
-		sql += comp.getId() + ")";
-		
-		
-
-		System.out.println("SQL stmt:" + sql);
-
-		PreparedStatement prepStmt = connection.prepareStatement(sql);
-		resources.add(prepStmt);
-		prepStmt.executeQuery();
-	
-	}
 }
+

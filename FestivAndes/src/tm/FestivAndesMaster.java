@@ -7,8 +7,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import dao.CompaniaDAO;
 import dao.EspectaculoDAO;
+import dao.UsuarioDAO;
+import vos.CompaniaTeatro;
 import vos.Espectaculo;
+import vos.ListaCompanias;
+import vos.Usuario;
 
 public class FestivAndesMaster {
 	
@@ -95,14 +100,57 @@ public class FestivAndesMaster {
 	///////Transacciones////////////////////
 	////////////////////////////////////////
 	
-	public void addEspectaculo(Espectaculo esp) throws Exception {
-		EspectaculoDAO espDAO = new EspectaculoDAO();
+	/**
+	 * Método que modela la transacción que agrega un solo video a la base de datos.
+	 * <b> post: </b> se ha agregado el video que entra como parámetro
+	 * @param video - el video a agregar. video != null
+	 * @throws Exception - cualquier error que se genera agregando el video
+	 */
+	public void addEspectaculo(Espectaculo espectaculo, ListaCompanias list) throws Exception {
+		EspectaculoDAO dao = new EspectaculoDAO();
 		try 
 		{
 			//////Transacción
 			this.conn = darConexion();
-			espDAO.setConnection(conn);
-			espDAO.addEspectaculo(esp);
+			conn.setAutoCommit(false);
+			dao.setConnection(conn);
+			dao.addEspectaculo(espectaculo);
+			for(CompaniaTeatro c : list.getCompanias())
+				dao.addRealizadoPor(espectaculo, c);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+
+
+	public void addUsuario(Usuario usuario) throws Exception {
+		UsuarioDAO dao = new UsuarioDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.addUsuario(usuario);
 			conn.commit();
 
 		} catch (SQLException e) {
@@ -115,7 +163,7 @@ public class FestivAndesMaster {
 			throw e;
 		} finally {
 			try {
-				espDAO.closeResources();
+				dao.closeResources();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {
@@ -125,6 +173,36 @@ public class FestivAndesMaster {
 			}
 		}
 	}
+	
+	public void addCompaniaTeatro(CompaniaTeatro compania) throws Exception {
+		CompaniaDAO dao = new CompaniaDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.addCompania(compania);
+			conn.commit();
 
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 
 }
