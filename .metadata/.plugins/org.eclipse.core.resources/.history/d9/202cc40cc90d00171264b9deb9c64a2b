@@ -1,0 +1,15 @@
+package dao;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+public class DAOTablaEspectaculo {
+	
+	private ArrayList<Object> resources;
+	private Connection connection;
+	
+	public void setConnection(Connection c) {
+		connection = c;
+	}
+
+}
