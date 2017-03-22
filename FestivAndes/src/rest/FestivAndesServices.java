@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import tm.FestivAndesMaster;
 import vos.Espectaculo;
 import vos.ListaCompanias;
+import vos.ListaEspectaculos;
 
 @Path("/festivandes")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,29 +22,18 @@ public class FestivAndesServices {
 
 	@Context
 	private ServletContext context;
-	
+
 	private String getPath() {
 		return context.getRealPath("WEB-INF/ConnectionData");
 	}
-	
-	private String makeErrorMessage(Exception e){
-		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
+
+	private String makeErrorMessage(Exception e) {
+		return "{ \"ERROR\": \"" + e.getMessage() + "\"}";
 	}
-	
-	//GETS
-	@GET
-	@Path("/espectaculos") 
-	public Response getEspectaculos() {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		try {
-			master.get
-		} catch (Exception e) {
-			return Response.status(500).entity(makeErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(esp).build();
-	}
-	
-	
+
+	// GETS
+
+
 	// POSTS
 	@POST
 	@Path("/espectaculos")
@@ -56,5 +46,5 @@ public class FestivAndesServices {
 		}
 		return Response.status(200).entity(esp).build();
 	}
-	
+
 }

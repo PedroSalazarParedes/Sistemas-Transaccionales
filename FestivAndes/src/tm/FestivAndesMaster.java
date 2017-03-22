@@ -64,9 +64,9 @@ public class FestivAndesMaster {
 
 
 	/**
-	 * Método constructor de la clase VideoAndesMaster, esta clase modela y contiene cada una de las 
+	 * Método constructor de la clase FestivAndesMaster, esta clase modela y contiene cada una de las 
 	 * transacciones y la logia de negocios que estas conllevan.
-	 * <b>post: </b> Se crea el objeto VideoAndesMaster, se inicializa el path absoluto de el archivo de conexión y se
+	 * <b>post: </b> Se crea el objeto FestivAndesMaster, se inicializa el path absoluto de el archivo de conexión y se
 	 * inicializa los atributos que se usan par la conexión a la base de datos.
 	 * @param contextPathP - path absoluto en el servidor del contexto del deploy actual
 	 */
@@ -151,12 +151,7 @@ public class FestivAndesMaster {
 
 	//RF4
 	
-	/**
-	 * Método que modela la transacción que agrega un solo video a la base de datos.
-	 * <b> post: </b> se ha agregado el video que entra como parámetro
-	 * @param video - el video a agregar. video != null
-	 * @throws Exception - cualquier error que se genera agregando el video
-	 */	
+
 	public void addEspectaculo(Espectaculo espectaculo, ListaCompanias list) throws Exception {
 		EspectaculoDAO dao = new EspectaculoDAO();
 		try 
@@ -233,7 +228,7 @@ public class FestivAndesMaster {
 		CompaniaDAO dao = new CompaniaDAO();
 		try 
 		{
-			//////Transacción
+			//////Transacción ACID
 			this.conn = darConexion();
 			dao.setConnection(conn);
 			dao.addCompania(compania);

@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="javax.ws.rs.POST"/>
 <fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
-<fullyQualifiedTypeName name="tm.FestivAndesMaster"/>
 <fullyQualifiedTypeName name="vos.Espectaculo"/>
 <fullyQualifiedTypeName name="dao.EspectaculoDAO"/>
 <fullyQualifiedTypeName name="vos.ListaCompanias"/>
@@ -16,6 +15,7 @@
 <fullyQualifiedTypeName name="vos.Funcion"/>
 <fullyQualifiedTypeName name="dao.FuncionDAO"/>
 <fullyQualifiedTypeName name="dao.LugarDAO"/>
-<fullyQualifiedTypeName name="vos.ListaEspectaculos"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="tm.FestivAndesMaster"/>
+<fullyQualifiedTypeName name="vos.ListaEspectaculos"/>
 </qualifiedTypeNameHistroy>

@@ -33,14 +33,7 @@ public class LugarDAO {
 		}
 	}
 	
-	/**
-	 * Método que agrega el espectaculo que entra como parámetro a la base de datos.
-	 * @param espectaculo- el espectaculo a agregar. video !=  null
-	 * <b> post: </b> se ha agregado el espetaculo a la base de datos en la transaction actual. pendiente que el festival master
-	 * haga commit para que el espectaculo baje  a la base de datos.
-	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
+
 	public void addLugar(Lugar lugar) throws SQLException, Exception {
 
 		String sql = "INSERT INTO LUGAR VALUES (";
@@ -63,13 +56,7 @@ public class LugarDAO {
 	}
 	
 	
-	/**
-	 * Método que busca el/los videos con el nombre que entra como parámetro.
-	 * @param name - Nombre de el/los videos a buscar
-	 * @return ArrayList con los videos encontrados
-	 * @throws SQLException - Cualquier error que la base de datos arroje.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
+
 	public Lugar buscarLugarPorId(Long id) throws SQLException, Exception {
 		Lugar lug = null;
 
