@@ -77,7 +77,7 @@ public class ConsultasDAO {
 	
 	
 	
-	public void consultarRentabilidadCompañias()
+	public void consultarRentabilidadCompanias()
 	{
 		
 	

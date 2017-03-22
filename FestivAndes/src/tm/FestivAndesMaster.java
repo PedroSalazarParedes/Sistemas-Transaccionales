@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import dao.BoletaDAO;
 import dao.CompaniaDAO;
+import dao.ConsultasDAO;
 import dao.EspectaculoDAO;
 import dao.FuncionDAO;
 import dao.LugarDAO;
@@ -452,6 +453,38 @@ public class FestivAndesMaster {
 	
 	//RFC1
 	
+	//RFC6
+	public ListaEspectaculos darEspectaculosMasPopulares(String from, String to) throws SQLException, Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			ListaEspectaculos list = new ListaEspectaculos(dao.getEspectaculosPopulares(from, to));
+			conn.commit();
+			return list;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 	
 
 }

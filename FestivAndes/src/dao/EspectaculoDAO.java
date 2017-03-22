@@ -76,32 +76,17 @@ public class EspectaculoDAO {
 	
 	}
 	
-<<<<<<< Updated upstream
+
     //RFC6	
 	
 	public ArrayList<Espectaculo> getEspectaculos() throws SQLException, Exception{
 		ArrayList<Espectaculo> e = new ArrayList<>();
 		String sql = "Select * From Espectaculo";
-
 		//no sée!
-		
-
-
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
 		prepStmt.executeQuery();
-
-		
-		
-		
-		
-		
-		
-		
-		
 		return e;
 	}
-=======
-	
->>>>>>> Stashed changes
+
 }

@@ -158,7 +158,7 @@ public class VideoAndesVideosServices {
      * @param videos - videos a agregar. 
      * @return Json con el video que agrego o Json con el error que se produjo
      */
-	@PUT
+	@POST
 	@Path("/videos")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
