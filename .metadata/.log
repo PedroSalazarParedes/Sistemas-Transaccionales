@@ -3250,3 +3250,8 @@ java.io.FileNotFoundException: /Users/pedrosalazar/Desktop/Universidad/2017-01/S
 	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1144)
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:51)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.ui 4 0 2017-03-22 18:00:33.497
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException

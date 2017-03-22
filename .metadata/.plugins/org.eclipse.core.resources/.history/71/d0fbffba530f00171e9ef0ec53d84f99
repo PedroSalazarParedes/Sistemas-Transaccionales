@@ -39,17 +39,6 @@ public class FuncionServices {
 		}
 		return Response.status(200).entity(f).build();
 	}
-	@POST
-	@Path("/realizada")
-	public Response registrarRealizacion(Funcion f) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		try {
-			master.registrarFuncionRealizada(f.getId());
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(f).build();
-	}
 
 
 }
