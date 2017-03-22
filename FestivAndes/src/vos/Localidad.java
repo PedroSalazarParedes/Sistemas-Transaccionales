@@ -13,39 +13,39 @@ public class Localidad
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="id")
+	@JsonProperty(value="idLocalidad")
 	private Long id;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="name")
+	@JsonProperty(value="nameLocalidad")
 	private String name;
 
 	/**
-	 * Descripci�n del espectaculo
+	 * Descripci�n del espectaculo
 	 */
-	@JsonProperty(value="idlugar")
+	@JsonProperty(value="idlugarLocalidad")
 	private Long idlugar;
 
 	
 	/**
 	 * Duración en minutos del espectaculo
 	 */
-	@JsonProperty(value="capacity")
+	@JsonProperty(value="capacityLocalidad")
 	private Integer capacity;
 	
 
 	/**
 	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="numfilas")
+	@JsonProperty(value="numfilasLocalidad")
 	private Integer numfilas;
 
 	/**
 	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="numsillas")
+	@JsonProperty(value="numsillasLocalidad")
 	private Integer numsillas;
 
 	/**
@@ -55,8 +55,8 @@ public class Localidad
 	 * @param name - Nombre del video. name != null
 	 * @param capacity - Duración en minutos del video.
 	 */
-	public Localidad(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="idlugar")Long idlugar,@JsonProperty(value="capacity") Integer capacity, 
-			 @JsonProperty(value="numfilas") Integer numfilas, @JsonProperty(value="numsillas") Integer numsillas) {
+	public Localidad(@JsonProperty(value="idLocalidad")Long id, @JsonProperty(value="nameLocalidad")String name,@JsonProperty(value="idlugarLocalidad")Long idlugar,@JsonProperty(value="capacityLocalidad") Integer capacity, 
+			 @JsonProperty(value="numfilasLocalidad") Integer numfilas, @JsonProperty(value="numsillasLocalidad") Integer numsillas) {
 		super();
 		this.id = id;
 		this.name = name;

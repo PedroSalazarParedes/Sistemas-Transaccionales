@@ -23,6 +23,7 @@ import vos.ListaCompanias;
 import vos.ListaEspectaculos;
 import vos.ListaLocalidades;
 import vos.Localidad;
+import vos.LocalidadesDetail;
 import vos.Lugar;
 import vos.Usuario;
 
@@ -299,7 +300,7 @@ public class FestivAndesMaster {
 	
 	//RF6
 	
-	public void addFuncion(Funcion fun, ArrayList<String> nomLocalidades, ArrayList<Integer> valores) throws Exception {
+	public void addFuncion(Funcion fun, LocalidadesDetail det) throws Exception {
 		FuncionDAO dao = new FuncionDAO();
 		LugarDAO dao2 = new LugarDAO();
 		try 
@@ -320,19 +321,19 @@ public class FestivAndesMaster {
 			{
 				if(l.getId()==null)
 				{
-					dao.addBoleta(fun, valores.get(0), num);
+					dao.addBoleta(fun, det.getValores().get(0),num);
 					num++;
 				}
 				else
 				{
-					for(int i=0;i<nomLocalidades.size();i++)
+					for(int i=0;i<det.getNombres().size();i++)
 					{
-						Localidad loc = dao2.buscarLocalidadPorNombreYLugar(nomLocalidades.get(i), lugar);
+						Localidad loc = dao2.buscarLocalidadPorNombreYLugar(det.getNombres().get(i), lugar);
 						Integer numfilas = loc.getNumfilas();
 						Long locid = loc.getId();
 						if(numfilas==null)
 						{
-							dao.addBoletaLocalidad(fun, valores.get(i), num, locid);
+							dao.addBoletaLocalidad(fun, det.getValores().get(i), num, locid);
 							num++;
 						}
 						else
@@ -342,7 +343,7 @@ public class FestivAndesMaster {
 								Integer numsillas=loc.getNumsillas();
 								for(int k=0;k<numsillas;k++)
 								{
-									dao.addBoletaNumerada(fun, valores.get(i), num, locid, j, k);
+									dao.addBoletaNumerada(fun, det.getValores().get(i), num, locid, j, k);
 									num++;
 								}
 							}
@@ -411,7 +412,7 @@ public class FestivAndesMaster {
 	
 	//RF8
 	
-	public void registrarBoletaComprada(Boleta boleta, int cliente)throws Exception
+	public void registrarBoletaComprada(Boleta boleta, Integer cliente)throws Exception
 	{
 		BoletaDAO dao = new BoletaDAO();
 		try 

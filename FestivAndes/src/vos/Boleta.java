@@ -17,33 +17,33 @@ public class Boleta
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="idfuncionfuncion")
+	@JsonProperty(value="idfuncionBoleta")
 	private Long idfuncion;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="valor")
+	@JsonProperty(value="valorBoleta")
 	private double valor;
 	
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="idlocalidad")
+	@JsonProperty(value="idlocalidadBoleta")
 	private Long idlocalidad;
 	
 
 	/**
 	 * Duración en minutos del espectaculo
 	 */
-	@JsonProperty(value="numfila")
+	@JsonProperty(value="numfilaBoleta")
 	private Integer numfila;
 	
 
 	/**
-	 * Requerimientos t�cnicos del espectaculo
+	 * Requerimientos t�cnicos del espectaculo
 	 */
-	@JsonProperty(value="numsilla;")
+	@JsonProperty(value="numsillaBoleta")
 	private Integer numsilla;
 
 	/**
@@ -53,9 +53,9 @@ public class Boleta
 	 * @param valor - Nombre del vidfuncioneo. valor != null
 	 * @param realizado - Duración en minutos del vidfuncioneo.
 	 */
-	public Boleta(@JsonProperty(value="id")Long idfuncion, @JsonProperty(value="valor")double valor,
-			 @JsonProperty(value="idlocalidad") Long idlocalidad, @JsonProperty(value="numfila") Integer numfila,
-			 @JsonProperty(value="numsilla") Integer numsilla) {
+	public Boleta(@JsonProperty(value="idBoleta")Long idfuncion, @JsonProperty(value="valorBoleta")double valor,
+			 @JsonProperty(value="idlocalidadBoleta") Long idlocalidad, @JsonProperty(value="numfilaBoleta") Integer numfila,
+			 @JsonProperty(value="numsillaBoleta") Integer numsilla) {
 		super();
 		this.idfuncion = idfuncion;
 		this.valor = valor;

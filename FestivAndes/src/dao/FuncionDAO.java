@@ -71,7 +71,7 @@ public class FuncionDAO {
 		
 	}
 	
-	public void addBoleta(Funcion espe, int valor, int num) throws SQLException, Exception {
+	public void addBoleta(Funcion espe, Double valor, int num) throws SQLException, Exception {
 
 		Long idfuncion = espe.getId();
 		String n = "NULL";
@@ -92,11 +92,11 @@ public class FuncionDAO {
 
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
-		prepStmt.executeQuery();
+		prepStmt.executeQuery();	
 	
 	}
 	
-	public void addBoletaLocalidad(Funcion espe, int valor, int num, Long idlocalidad) throws SQLException, Exception
+	public void addBoletaLocalidad(Funcion espe, Double double1, int num, Long idlocalidad) throws SQLException, Exception
 	{
 		Long idfuncion = espe.getId();
 		String n = "NULL";
@@ -104,7 +104,7 @@ public class FuncionDAO {
 		String sql = "INSERT INTO ISIS2304B241710.BOLETA VALUES (";
 		sql += num + ",";
 		sql += idfuncion + ",";
-		sql += valor + ",";
+		sql += double1 + ",";
 		sql += n + ",";
 		sql += idlocalidad + ",";
 		sql += n + ",";
@@ -118,7 +118,7 @@ public class FuncionDAO {
 		prepStmt.executeQuery();
 	}
 	
-	public void addBoletaNumerada(Funcion espe, int valor, int num, Long idlocalidad, int numfila, int numsilla)throws SQLException, Exception
+	public void addBoletaNumerada(Funcion espe, Double double1, int num, Long idlocalidad, int numfila, int numsilla)throws SQLException, Exception
 	{
 		Long idfuncion = espe.getId();
 		String n = "NULL";
@@ -126,7 +126,7 @@ public class FuncionDAO {
 		String sql = "INSERT INTO ISIS2304B241710.BOLETA VALUES (";
 		sql += num + ",";
 		sql += idfuncion + ",";
-		sql += valor + ",";
+		sql += double1 + ",";
 		sql += n + ",";
 		sql += idlocalidad + ",";
 		sql += numfila + ",";
