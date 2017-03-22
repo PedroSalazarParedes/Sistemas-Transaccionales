@@ -13,68 +13,68 @@ public class Espectaculo
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="id")
+	@JsonProperty(value="idEspactaculo")
 	private Long id;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="name")
+	@JsonProperty(value="nameEspactaculo")
 	private String name;
 
 	/**
 	 * DuraciÃ³n en minutos del espectaculo
 	 */
-	@JsonProperty(value="duration")
+	@JsonProperty(value="durationEspactaculo")
 	private int duration;
 	
 	/**
-	 * Costo de realización del espectaculo
+	 * Costo de realizaciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="cost")
+	@JsonProperty(value="costEspactaculo")
 	private double cost;
 
 	/**
-	 * Participación del público en el espectáculo
+	 * Participaciï¿½n del pï¿½blico en el espectï¿½culo
 	 */
-	@JsonProperty(value="participation")
+	@JsonProperty(value="participationEspectaculo")
 	private int participation;
 
 	
 	/**
-	 * Descripción del espectaculo
+	 * Descripciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="description")
+	@JsonProperty(value="descriptionEspectaculo")
 	private String description;
 
 	/**
 	 * Publico objetivo del espectaculo
 	 */
-	@JsonProperty(value="objetivo")
+	@JsonProperty(value="objetivoEspactaculo")
 	private String objetivo;
 
 	/**
 	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="idioma")
+	@JsonProperty(value="idiomaEspectaculo")
 	private String idioma;
 
 	/**
-	 * Tipo de traducción del espectaculo
+	 * Tipo de traducciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="traduccion")
+	@JsonProperty(value="traduccionEspectaculo")
 	private String traduccion;
 
 	/**
-	 * Requerimientos técnicos del espectaculo
+	 * Requerimientos tï¿½cnicos del espectaculo
 	 */
-	@JsonProperty(value="reqtecnicos")
+	@JsonProperty(value="reqtecnicosEspectaculo")
 	private String reqtecnicos;
 
 	/**
 	 * Id de la categoria del espectaculo
 	 */
-	@JsonProperty(value="idcategoria")
+	@JsonProperty(value="idcategoriaEspactaculo")
 	private Long idcategoria;
 
 
@@ -85,9 +85,9 @@ public class Espectaculo
 	 * @param name - Nombre del video. name != null
 	 * @param duration - DuraciÃ³n en minutos del video.
 	 */
-	public Espectaculo(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="duration") int duration,@JsonProperty(value="cost") double cost, @JsonProperty(value="participation") int participation,
-			@JsonProperty(value="description") String description, @JsonProperty(value="objetivo") String objetivo, @JsonProperty(value="idioma") String idioma, @JsonProperty(value="traduccion") String traduccion, 
-			@JsonProperty(value="reqtecnicos") String reqtecnicos, @JsonProperty(value="idcategoria") Long idcategoria) {
+	public Espectaculo(@JsonProperty(value="idEspactaculo")Long id, @JsonProperty(value="nameEspactaculo")String name,@JsonProperty(value="durationEspactaculo") int duration,@JsonProperty(value="costEspactaculo") double cost, @JsonProperty(value="participationEspactaculo") int participation,
+			@JsonProperty(value="descriptionEspactaculo") String description, @JsonProperty(value="objetivoEspactaculo") String objetivo, @JsonProperty(value="idiomaEspactaculo") String idioma, @JsonProperty(value="traduccionEspactaculo") String traduccion, 
+			@JsonProperty(value="reqtecnicosEspactaculo") String reqtecnicos, @JsonProperty(value="idcategoriaEspactaculo") Long idcategoria) {
 		super();
 		this.id = id;
 		this.name = name;

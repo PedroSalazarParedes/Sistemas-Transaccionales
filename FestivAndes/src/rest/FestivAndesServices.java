@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 
 import tm.FestivAndesMaster;
 import vos.Espectaculo;
+import vos.ListaCompanias;
 
 @Path("/festivandes")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -30,10 +31,10 @@ public class FestivAndesServices {
 	
 	@POST
 	@Path("/espectaculos")
-	public Response addEspectaculo(Espectaculo esp) {
+	public Response addEspectaculo(Espectaculo esp, ListaCompanias list) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
-			master.addEspectaculo(esp);
+			master.addEspectaculo(esp, list);
 		} catch (Exception e) {
 			return Response.status(500).entity(makeErrorMessage(e)).build();
 		}

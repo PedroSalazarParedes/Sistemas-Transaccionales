@@ -13,52 +13,52 @@ public class Lugar
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="id")
+	@JsonProperty(value="idLugar")
 	private Long id;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="name")
+	@JsonProperty(value="nameLugar")
 	private String name;
 
 	/**
-	 * Descripción del espectaculo
+	 * Descripciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="tipo")
+	@JsonProperty(value="tipoLugar")
 	private String tipo;
 
 	
 	/**
 	 * DuraciÃ³n en minutos del espectaculo
 	 */
-	@JsonProperty(value="capacity")
+	@JsonProperty(value="capacityLugar")
 	private int capacity;
 	
 	
 	
 	/**
-	 * Descripción del espectaculo
+	 * Descripciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="silleteria")
+	@JsonProperty(value="silleteriaLugar")
 	private String silleteria;
 
 	/**
 	 * Publico proteccion del espectaculo
 	 */
-	@JsonProperty(value="accesibilidad")
+	@JsonProperty(value="accesibilidadLugar")
 	private String accesibilidad;
 
 	/**
 	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="proteccion")
+	@JsonProperty(value="proteccionLugar")
 	private int proteccion;
 
 	/**
-	 * Tipo de traducción del espectaculo
+	 * Tipo de traducciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="condtecnicas")
+	@JsonProperty(value="condtecnicasLugar")
 	private String condtecnicas;
 
 	/**
@@ -68,8 +68,8 @@ public class Lugar
 	 * @param name - Nombre del video. name != null
 	 * @param capacity - DuraciÃ³n en minutos del video.
 	 */
-	public Lugar(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="tipo")String tipo,@JsonProperty(value="capacity") int capacity, @JsonProperty(value="silleteria") String silleteria,
-			@JsonProperty(value="accesibilidad") String accesibilidad, @JsonProperty(value="proteccion") int proteccion, @JsonProperty(value="condtecnicas") String condtecnicas) {
+	public Lugar(@JsonProperty(value="idLugar")Long id, @JsonProperty(value="nameLugar")String name,@JsonProperty(value="tipoLugar")String tipo,@JsonProperty(value="capacityLugar") int capacity, @JsonProperty(value="silleteriaLugar") String silleteria,
+			@JsonProperty(value="accesibilidadLugar") String accesibilidad, @JsonProperty(value="proteccionLugar") int proteccion, @JsonProperty(value="condtecnicasLugar") String condtecnicas) {
 		super();
 		this.id = id;
 		this.name = name;

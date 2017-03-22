@@ -13,32 +13,32 @@ public class CompaniaTeatro
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="id")
+	@JsonProperty(value="idCompania")
 	private Long id;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="name")
+	@JsonProperty(value="nameEspecCompania")
 	private String name;
 
 	
 	/**
-	 * Descripción del espectaculo
+	 * Descripciï¿½n del espectaculo
 	 */
-	@JsonProperty(value="representante")
+	@JsonProperty(value="representanteCompania")
 	private String representante;
 
 	/**
 	 * Publico paginaWeb del espectaculo
 	 */
-	@JsonProperty(value="paginaWeb")
+	@JsonProperty(value="paginaWebCompania")
 	private String paginaWeb;
 
 	/**
 	 * pais del espectaculo
 	 */
-	@JsonProperty(value="pais")
+	@JsonProperty(value="paisCompania")
 	private String pais;
 
 
@@ -50,8 +50,8 @@ public class CompaniaTeatro
 	 * @param name - Nombre del video. name != null
 	 * @param duration - DuraciÃ³n en minutos del video.
 	 */
-	public CompaniaTeatro(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,
-			@JsonProperty(value="representante") String representante, @JsonProperty(value="paginaWeb") String paginaWeb, @JsonProperty(value="pais") String pais) {
+	public CompaniaTeatro(@JsonProperty(value="idCompania")Long id, @JsonProperty(value="nameCompania")String name,
+			@JsonProperty(value="representanteCompania") String representante, @JsonProperty(value="paginaWebCompania") String paginaWeb, @JsonProperty(value="paisCompania") String pais) {
 		super();
 		this.id = id;
 		this.name = name;

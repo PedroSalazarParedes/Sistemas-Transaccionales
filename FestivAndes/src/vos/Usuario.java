@@ -12,26 +12,26 @@ package vos;
 		/**
 		 * Id del espectaculo
 		 */
-		@JsonProperty(value="id")
+		@JsonProperty(value="idUsuario")
 		private Long id;
 
 		/**
 		 * Nombre del espectaculo
 		 */
-		@JsonProperty(value="name")
+		@JsonProperty(value="nameUsuario")
 		private String name;
 
 		
 		/**
-		 * Descripción del espectaculo
+		 * Descripciï¿½n del espectaculo
 		 */
-		@JsonProperty(value="email")
+		@JsonProperty(value="emailUsuario")
 		private String email;
 
 		/**
 		 * Publico objetivo del espectaculo
 		 */
-		@JsonProperty(value="rol")
+		@JsonProperty(value="rolUsuario")
 		private String rol;
 
 	
@@ -42,7 +42,7 @@ package vos;
 		 * @param name - Nombre del video. name != null
 		 * @param duration - DuraciÃ³n en minutos del video.
 		 */
-		public Usuario(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="email") String email,@JsonProperty(value="rol") String rol) {
+		public Usuario(@JsonProperty(value="idUsuario")Long id, @JsonProperty(value="nameUsuario")String name,@JsonProperty(value="emailUsuario") String email,@JsonProperty(value="rolUsuario") String rol) {
 			super();
 			this.id = id;
 			this.name = name;
