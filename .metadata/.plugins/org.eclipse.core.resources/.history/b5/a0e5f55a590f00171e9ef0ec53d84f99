@@ -47,13 +47,13 @@ public class ConsultasDAO {
 	 * @throws Exception
 	 *             - Cualquier error que no corresponda a la base de datos
 	 */
-	public String generarReporteFuncion(Integer id) throws SQLException,
+	public String generarReporteFuncion(Long idfuncion) throws SQLException,
 			Exception {
 		String str = "";
 		String sql = "SELECT nombre_localidad, cliente, SUM(valor) producido, COUNT(*) boletas_vendidas "
 				+ "FROM (BOLETA NATURAL INNER JOIN LOCALIDAD) "
 				+ "WHERE id_funcion = "
-				+ id
+				+ idfuncion
 				+ " GROUP BY id_localidad, nombre_localidad, cliente"
 				+ " ORDER BY nombre_localidad";
 
@@ -66,12 +66,12 @@ public class ConsultasDAO {
 
 	}
 
-	public String generarReporteEspectaculo(Integer id)
+	public String generarReporteEspectaculo(Long idespectaculo)
 			throws SQLException, Exception {
 		String str = "";
 		String sql = "SELECT id_funcion, nombre_lugar, sum(valor) producido, count(*) boletas_vendidas, count(*)/capacidad porcentaje_ocupacion"
 				+ " WHERE id_espectaculo = "
-				+ id
+				+ idespectaculo
 				+ " GROUP BY id_funcion, nombre_lugar, capacidad, cliente"
 				+ " ORDER BY nombre_lugar, id_funcion";
 

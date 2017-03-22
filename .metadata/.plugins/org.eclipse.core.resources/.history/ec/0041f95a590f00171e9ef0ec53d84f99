@@ -2,10 +2,8 @@ package rest;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -51,19 +49,6 @@ public class FuncionServices {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(f).build();
-	}
-	
-	@GET
-	@Path("/reporte/{id: \\d+}")
-	public Response reporteFuncion(@PathParam("id") Integer id) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		String s;
-		try {
-			s = master.darReporteDeFuncion(id);
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(s).build();
 	}
 
 

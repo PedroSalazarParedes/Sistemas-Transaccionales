@@ -59,7 +59,7 @@ public class FuncionServices {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;
 		try {
-			s = master.darReporteDeFuncion(id);
+			s = master.
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}

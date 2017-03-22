@@ -1,25 +1,28 @@
 package rest;
 
+import java.util.Date;
+
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.FestivAndesMaster;
-import vos.Funcion;
-import vos.LocalidadesDetail;
+import vos.Espectaculo;
+import vos.ListaCompanias;
+import vos.ListaEspectaculos;
 
-
-@Path("/funciones")
+@Path("/espectaculos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class FuncionServices {
+public class EspectaculoServices {
+
 	@Context
 	private ServletContext context;
 
@@ -30,41 +33,32 @@ public class FuncionServices {
 	private String buildErrorMessage(Exception e) {
 		return "{ \"ERROR\": \"" + e.getMessage() + "\"}";
 	}
-	
-	@POST
-	public Response addFuncion(Funcion f, LocalidadesDetail det) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		try {
-			master.addFuncion(f, det);
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(f).build();
-	}
-	@POST
-	@Path("/realizada")
-	public Response registrarRealizacion(Funcion f) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		try {
-			master.registrarFuncionRealizada(f.getId());
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(f).build();
-	}
-	
+
+	// GETS
 	@GET
-	@Path("/reporte/{id: \\d+}")
-	public Response reporteFuncion(@PathParam("id") Integer id) {
+	@Path("/populares")
+	public Response espectaculosPopulares(@QueryParam("from") Date from, @QueryParam("to") Date to) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		String s;
+		ListaEspectaculos esps;
 		try {
-			s = master.darReporteDeFuncion(id);
+			String fromm = from.toString(); String too = to.toString();
+			esps = master.darEspectaculosMasPopulares(fromm,too);
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(s).build();
+		return Response.status(200).entity(esps).build();
 	}
 
+	// POSTS
+	@POST
+	public Response addEspectaculo(Espectaculo esp, ListaCompanias list) {
+		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		try {
+			master.addEspectaculo(esp, list);
+		} catch (Exception e) {
+			return Response.status(500).entity(buildErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(esp).build();
+	}
 
 }

@@ -66,12 +66,12 @@ public class ConsultasDAO {
 
 	}
 
-	public String generarReporteEspectaculo(Integer id)
+	public String generarReporteEspectaculo(Long idespectaculo)
 			throws SQLException, Exception {
 		String str = "";
 		String sql = "SELECT id_funcion, nombre_lugar, sum(valor) producido, count(*) boletas_vendidas, count(*)/capacidad porcentaje_ocupacion"
 				+ " WHERE id_espectaculo = "
-				+ id
+				+ idespectaculo
 				+ " GROUP BY id_funcion, nombre_lugar, capacidad, cliente"
 				+ " ORDER BY nombre_lugar, id_funcion";
 
