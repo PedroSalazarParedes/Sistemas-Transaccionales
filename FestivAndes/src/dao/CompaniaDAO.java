@@ -39,14 +39,14 @@ public class CompaniaDAO {
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addCompania(CompaniaTeatro compañia) throws SQLException, Exception {
+	public void addCompania(CompaniaTeatro compania) throws SQLException, Exception {
 
 		String sql = "INSERT INTO COMPAÑIA_TEATRO VALUES (";
-		sql += compañia.getId() + ",'";
-		sql += compañia.getName() + "','";
-		sql += compañia.getRepresentante() + "','";
-		sql += compañia.getPaginaWeb() + "','";
-		sql += compañia.getPais() + "')";
+		sql += compania.getId() + ",'";
+		sql += compania.getName() + "','";
+		sql += compania.getRepresentante() + "','";
+		sql += compania.getPaginaWeb() + "','";
+		sql += compania.getPais() + "')";
 		
 
 		System.out.println("SQL stmt:" + sql);

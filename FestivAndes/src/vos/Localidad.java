@@ -3,10 +3,10 @@ package vos;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * Clase que representa un Lugar
+ * Clase que representa un Localidad
  * @author Mariana
  */
-public class Lugar 
+public class Localidad 
 {
 ////Atributos
 
@@ -25,41 +25,28 @@ public class Lugar
 	/**
 	 * Descripci�n del espectaculo
 	 */
-	@JsonProperty(value="tipo")
-	private String tipo;
+	@JsonProperty(value="idlugar")
+	private Long idlugar;
 
 	
 	/**
 	 * Duración en minutos del espectaculo
 	 */
 	@JsonProperty(value="capacity")
-	private int capacity;
+	private Integer capacity;
 	
-	
-	
-	/**
-	 * Descripci�n del espectaculo
-	 */
-	@JsonProperty(value="silleteria")
-	private String silleteria;
-
-	/**
-	 * Publico proteccion del espectaculo
-	 */
-	@JsonProperty(value="accesibilidad")
-	private String accesibilidad;
 
 	/**
 	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="proteccion")
-	private int proteccion;
+	@JsonProperty(value="numfilas")
+	private Integer numfilas;
 
 	/**
-	 * Tipo de traducci�n del espectaculo
+	 * Idioma del espectaculo
 	 */
-	@JsonProperty(value="condtecnicas")
-	private String condtecnicas;
+	@JsonProperty(value="numsillas")
+	private Integer numsillas;
 
 	/**
 	 * Método constructor de la clase espectaculo
@@ -68,23 +55,22 @@ public class Lugar
 	 * @param name - Nombre del video. name != null
 	 * @param capacity - Duración en minutos del video.
 	 */
-	public Lugar(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="tipo")String tipo,@JsonProperty(value="capacity") int capacity, @JsonProperty(value="silleteria") String silleteria,
-			@JsonProperty(value="accesibilidad") String accesibilidad, @JsonProperty(value="proteccion") int proteccion, @JsonProperty(value="condtecnicas") String condtecnicas) {
+	public Localidad(@JsonProperty(value="id")Long id, @JsonProperty(value="name")String name,@JsonProperty(value="idlugar")Long idlugar,@JsonProperty(value="capacity") Integer capacity, 
+			 @JsonProperty(value="numfilas") Integer numfilas, @JsonProperty(value="numsillas") Integer numsillas) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
-		this.silleteria = silleteria;
-		this.accesibilidad = accesibilidad;
-		this.proteccion = proteccion;
-		this.condtecnicas = condtecnicas;
+		this.idlugar = idlugar;
+		this.numsillas = numsillas;
+		this.numfilas = numfilas;
 	}
 	
 	/**
 	 * Método getter del atributo capacity
 	 * @return duración del espectaculo en minutos
 	 */
-	public int getCapacity() {
+	public Integer getCapacity() {
 		return capacity;
 	}
 
@@ -93,7 +79,7 @@ public class Lugar
 	 * ha sido cambiado con el valor que entra como parámetro
 	 * @param capacity - Duración en minutos del espectaculo.
 	 */
-	public void setCapacity(int capacity) {
+	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
 
@@ -135,8 +121,8 @@ public class Lugar
 	 * Método getter del atributo name
 	 * @return nombre del espectaculo
 	 */
-	public String getTipo() {
-		return tipo;
+	public Long getIdlugar() {
+		return idlugar;
 	}
 
 	/**
@@ -144,16 +130,16 @@ public class Lugar
 	 * cambiado con el valor que entra como parámetro
 	 * @param name - Nombre del espectaculo
 	 */
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setIdlugar(Long idlugar) {
+		this.idlugar = idlugar;
 	}
 	
 	/**
 	 * Método getter del atributo name
 	 * @return nombre del espectaculo
 	 */
-	public String getSilleteria() {
-		return silleteria;
+	public Integer getNumfilas() {
+		return numfilas;
 	}
 
 	/**
@@ -161,16 +147,17 @@ public class Lugar
 	 * cambiado con el valor que entra como parámetro
 	 * @param name - Nombre del espectaculo
 	 */
-	public void setSilleteria(String silleteria) {
-		this.silleteria = silleteria;
+	public void setNumfilas(Integer numfilas) {
+		this.numfilas = numfilas;
 	}
+	
 	
 	/**
 	 * Método getter del atributo name
 	 * @return nombre del espectaculo
 	 */
-	public String getAccesibilidad() {
-		return accesibilidad;
+	public Integer getNumsillas() {
+		return numsillas;
 	}
 
 	/**
@@ -178,44 +165,8 @@ public class Lugar
 	 * cambiado con el valor que entra como parámetro
 	 * @param name - Nombre del espectaculo
 	 */
-	public void setAccesibilidad(String accesibilidad) {
-		this.accesibilidad = accesibilidad;
+	public void setNumsillas(Integer numsillas) {
+		this.numsillas = numsillas;
 	}
-	
-	/**
-	 * Método getter del atributo name
-	 * @return nombre del espectaculo
-	 */
-	public int getProteccion() {
-		return proteccion;
-	}
-
-	/**
-	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
-	 * cambiado con el valor que entra como parámetro
-	 * @param name - Nombre del espectaculo
-	 */
-	public void setProteccion(int proteccion) {
-		this.proteccion = proteccion;
-	}
-	
-	
-	
-	 /** Método getter del atributo name
-	 * @return nombre del espectaculo
-	 */
-	public String getCondtecnicas() {
-		return condtecnicas;
-	}
-
-	/**
-	 * Método setter del atributo name <b>post: </b> El nombre del espectaculo ha sido
-	 * cambiado con el valor que entra como parámetro
-	 * @param name - Nombre del espectaculo
-	 */
-	public void setCondtecnicas(String condtecnicas) {
-		this.condtecnicas = condtecnicas;
-	}
-	
 	
 }

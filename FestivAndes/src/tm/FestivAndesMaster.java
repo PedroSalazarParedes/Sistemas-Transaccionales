@@ -5,14 +5,21 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import dao.CompaniaDAO;
 import dao.EspectaculoDAO;
+import dao.FuncionDAO;
+import dao.LugarDAO;
 import dao.UsuarioDAO;
 import vos.CompaniaTeatro;
 import vos.Espectaculo;
+import vos.Funcion;
 import vos.ListaCompanias;
+import vos.ListaLocalidades;
+import vos.Localidad;
+import vos.Lugar;
 import vos.Usuario;
 
 public class FestivAndesMaster {
@@ -100,12 +107,15 @@ public class FestivAndesMaster {
 	///////Transacciones////////////////////
 	////////////////////////////////////////
 	
+	
+	//RF4
+	
 	/**
 	 * Método que modela la transacción que agrega un solo video a la base de datos.
 	 * <b> post: </b> se ha agregado el video que entra como parámetro
 	 * @param video - el video a agregar. video != null
 	 * @throws Exception - cualquier error que se genera agregando el video
-	 */
+	 */	
 	public void addEspectaculo(Espectaculo espectaculo, ListaCompanias list) throws Exception {
 		EspectaculoDAO dao = new EspectaculoDAO();
 		try 
@@ -142,6 +152,8 @@ public class FestivAndesMaster {
 		}
 	}
 
+	
+	//RF1-2
 
 	public void addUsuario(Usuario usuario) throws Exception {
 		UsuarioDAO dao = new UsuarioDAO();
@@ -174,6 +186,8 @@ public class FestivAndesMaster {
 		}
 	}
 	
+	//RF3
+	
 	public void addCompaniaTeatro(CompaniaTeatro compania) throws Exception {
 		CompaniaDAO dao = new CompaniaDAO();
 		try 
@@ -204,5 +218,123 @@ public class FestivAndesMaster {
 			}
 		}
 	}
+	
+	
+	//RF5
 
+	public void addLugar(Lugar lugar, ListaLocalidades localidades) throws Exception {
+		LugarDAO dao = new LugarDAO();
+		try 
+		{
+			//////Transacción ACID
+			this.conn = darConexion();
+			conn.setAutoCommit(false);
+			dao.setConnection(conn);
+			dao.addLugar(lugar);
+			for(Localidad c : localidades.getLocalidades())
+				dao.addLocalidad(c);
+			
+			conn.commit();
+			
+			
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+
+	
+	
+	//RF6
+	
+	public void addFuncion(Funcion fun, ArrayList<String> nomLocalidades, ArrayList<Integer> valores) throws Exception {
+		FuncionDAO dao = new FuncionDAO();
+		LugarDAO dao2 = new LugarDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			conn.setAutoCommit(false);
+			dao.setConnection(conn);
+			dao2.setConnection(conn);
+			dao.addFuncion(fun);
+			
+			Long lugar = fun.getIdlugar();
+			Lugar l = dao2.buscarLugarPorId(lugar);
+			
+			int capacidad=l.getCapacity();
+			
+			for(int num=1; num<=capacidad;)
+			{
+				if(l.getId()==null)
+				{
+					dao.addBoleta(fun, valores.get(0), num);
+					num++;
+				}
+				else
+				{
+					for(int i=0;i<nomLocalidades.size();i++)
+					{
+						Localidad loc = dao2.buscarLocalidadPorNombreYLugar(nomLocalidades.get(i), lugar);
+						Integer numfilas = loc.getNumfilas();
+						Long locid = loc.getId();
+						if(numfilas==null)
+						{
+							dao.addBoletaLocalidad(fun, valores.get(i), num, locid);
+							num++;
+						}
+						else
+						{
+							for(int j=0;j<numfilas;j++)
+							{
+								Integer numsillas=loc.getNumsillas();
+								for(int k=0;k<numsillas;k++)
+								{
+									dao.addBoletaNumerada(fun, valores.get(i), num, locid, j, k);
+									num++;
+								}
+							}
+						}
+					}
+				}
+			}
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			conn.rollback();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 }
