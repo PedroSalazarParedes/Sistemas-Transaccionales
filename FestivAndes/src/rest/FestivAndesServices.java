@@ -2,6 +2,7 @@ package rest;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,6 +30,21 @@ public class FestivAndesServices {
 		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
 	}
 	
+	//GETS
+	@GET
+	@Path("/espectaculos") 
+	public Response getEspectaculos() {
+		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		try {
+			master.get
+		} catch (Exception e) {
+			return Response.status(500).entity(makeErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(esp).build();
+	}
+	
+	
+	// POSTS
 	@POST
 	@Path("/espectaculos")
 	public Response addEspectaculo(Espectaculo esp, ListaCompanias list) {
@@ -40,4 +56,5 @@ public class FestivAndesServices {
 		}
 		return Response.status(200).entity(esp).build();
 	}
+	
 }

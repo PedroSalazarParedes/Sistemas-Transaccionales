@@ -41,7 +41,7 @@ public class CompaniaDAO {
 	 */
 	public void addCompania(CompaniaTeatro compania) throws SQLException, Exception {
 
-		String sql = "INSERT INTO COMPAÑIA_TEATRO VALUES (";
+		String sql = "INSERT INTO COMPAï¿½IA_TEATRO VALUES (";
 		sql += compania.getId() + ",'";
 		sql += compania.getName() + "','";
 		sql += compania.getRepresentante() + "','";

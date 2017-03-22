@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import vos.CompaniaTeatro;
 import vos.Espectaculo;
+import vos.ListaEspectaculos;
 
 public class EspectaculoDAO {
 
@@ -79,5 +81,20 @@ public class EspectaculoDAO {
 		resources.add(prepStmt);
 		prepStmt.executeQuery();
 	
+	}
+	
+	public ListaEspectaculos getEspectaculos() throws SQLException, Exception{
+		List<Espectaculo> e = new ArrayList<>();
+		String sql = "Select * From Espectaculo";
+
+		//no sée!
+		
+
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		prepStmt.executeQuery();
+
+		
 	}
 }

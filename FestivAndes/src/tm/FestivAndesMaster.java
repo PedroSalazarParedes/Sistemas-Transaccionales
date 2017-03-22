@@ -17,6 +17,7 @@ import vos.CompaniaTeatro;
 import vos.Espectaculo;
 import vos.Funcion;
 import vos.ListaCompanias;
+import vos.ListaEspectaculos;
 import vos.ListaLocalidades;
 import vos.Localidad;
 import vos.Lugar;
@@ -107,6 +108,36 @@ public class FestivAndesMaster {
 	///////Transacciones////////////////////
 	////////////////////////////////////////
 	
+	public ListaEspectaculos getEspectaculos() {
+		EspectaculoDAO dao = new EspectaculoDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 	
 	//RF4
 	

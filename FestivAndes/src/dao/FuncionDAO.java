@@ -60,7 +60,9 @@ public class FuncionDAO {
 
 	}
 	
-	public void registrarFuncionRealizada()
+	public void registrarFuncionRealizada() {
+		
+	}
 	
 	public void addBoleta(Funcion espe, int valor, int num) throws SQLException, Exception {
 
