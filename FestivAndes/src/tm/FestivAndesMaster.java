@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import dao.BoletaDAO;
 import dao.CompaniaDAO;
 import dao.EspectaculoDAO;
 import dao.FuncionDAO;
 import dao.LugarDAO;
 import dao.UsuarioDAO;
+import vos.Boleta;
 import vos.CompaniaTeatro;
 import vos.Espectaculo;
 import vos.Funcion;
@@ -108,14 +110,17 @@ public class FestivAndesMaster {
 	///////Transacciones////////////////////
 	////////////////////////////////////////
 	
-	public ListaEspectaculos getEspectaculos() {
+	
+	//RFC6
+	public ListaEspectaculos getEspectaculos() throws Exception{
 		EspectaculoDAO dao = new EspectaculoDAO();
+		ArrayList<Espectaculo> lista = null;
 		try 
 		{
 			//////Transacción
 			this.conn = darConexion();
 			dao.setConnection(conn);
-			dao.
+			lista  = dao.getEspectaculos();
 			conn.commit();
 
 		} catch (SQLException e) {
@@ -137,8 +142,13 @@ public class FestivAndesMaster {
 				throw exception;
 			}
 		}
+		return new ListaEspectaculos(lista);
 	}
-	
+
+	////////////////////////////////////////
+	///////Requerimientos///////////////////
+	////////////////////////////////////////
+
 	//RF4
 	
 	/**
@@ -368,4 +378,88 @@ public class FestivAndesMaster {
 			}
 		}
 	}
+	
+	//RF9
+	
+	public void registrarFuncionRealizada(Long idfuncion) throws  Exception
+	{
+		FuncionDAO dao = new FuncionDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.registrarFuncionRealizada(idfuncion);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	//RF8
+	
+	public void registrarBoletaComprada(Boleta boleta, int cliente)throws Exception
+	{
+		BoletaDAO dao = new BoletaDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.registrarBoletaComprada(boleta, cliente);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	
+	//RF7
+
+
+	////////////////////////////////////////
+	///////Consultas////////////////////////
+	////////////////////////////////////////
+	
+	//RFC1
+	
+	
+
 }
+
+	
+	

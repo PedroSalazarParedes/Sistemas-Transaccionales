@@ -83,8 +83,10 @@ public class EspectaculoDAO {
 	
 	}
 	
-	public ListaEspectaculos getEspectaculos() throws SQLException, Exception{
-		List<Espectaculo> e = new ArrayList<>();
+    //RFC6	
+	
+	public ArrayList<Espectaculo> getEspectaculos() throws SQLException, Exception{
+		ArrayList<Espectaculo> e = new ArrayList<>();
 		String sql = "Select * From Espectaculo";
 
 		//no sée!
@@ -96,5 +98,13 @@ public class EspectaculoDAO {
 		prepStmt.executeQuery();
 
 		
+		
+		
+		
+		
+		
+		
+		
+		return e;
 	}
 }

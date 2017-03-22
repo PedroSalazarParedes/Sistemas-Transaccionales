@@ -41,7 +41,7 @@ public class FuncionDAO {
 	 */
 	public void addFuncion(Funcion funcion) throws SQLException, Exception {
 
-		String sql = "INSERT INTO FUNCION VALUES (";
+		String sql = "INSERT INTO ISIS2304B241710.FUNCION VALUES (";
 		sql += funcion.getId() + ",'";
 		sql += funcion.getFecha() + "','";
 		sql += funcion.getHora() + "',";
@@ -60,7 +60,21 @@ public class FuncionDAO {
 
 	}
 	
-	public void registrarFuncionRealizada() {
+	public void registrarFuncionRealizada(Long idfuncion) throws SQLException, Exception{
+		
+		
+		String sql = "UPDATE ISIS2304B241710.FUNCION SET ";
+		sql += "realizado=1,";
+		sql += "num_asistentes= (SELECT COUNT(*) FROM ISIS2304B241710.BOLETA"
+				                                + "WHERE id_funcion = "+idfuncion
+				                                + "AND disponible = 0)";
+		sql += " WHERE id = " + idfuncion;
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		prepStmt.executeQuery();
 		
 	}
 	
@@ -69,7 +83,7 @@ public class FuncionDAO {
 		Long idfuncion = espe.getId();
 		String n = "NULL";
 		
-		String sql = "INSERT INTO BOLETA VALUES (";
+		String sql = "INSERT INTO ISIS2304B241710.BOLETA VALUES (";
 		sql += num + ",";
 		sql += idfuncion + ",";
 		sql += valor + ",";
@@ -94,7 +108,7 @@ public class FuncionDAO {
 		Long idfuncion = espe.getId();
 		String n = "NULL";
 		
-		String sql = "INSERT INTO BOLETA VALUES (";
+		String sql = "INSERT INTO ISIS2304B241710.BOLETA VALUES (";
 		sql += num + ",";
 		sql += idfuncion + ",";
 		sql += valor + ",";
@@ -116,7 +130,7 @@ public class FuncionDAO {
 		Long idfuncion = espe.getId();
 		String n = "NULL";
 		
-		String sql = "INSERT INTO BOLETA VALUES (";
+		String sql = "INSERT INTO ISIS2304B241710.BOLETA VALUES (";
 		sql += num + ",";
 		sql += idfuncion + ",";
 		sql += valor + ",";
@@ -132,4 +146,10 @@ public class FuncionDAO {
 		resources.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	
+	
+	
+	
+	
 }
