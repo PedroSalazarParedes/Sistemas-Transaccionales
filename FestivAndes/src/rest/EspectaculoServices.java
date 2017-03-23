@@ -52,6 +52,7 @@ public class EspectaculoServices {
 	
 	@GET
 	@Path("/reporte/{id: \\d+}")
+	@Produces({ MediaType.TEXT_PLAIN })
 	public Response reporteEspectaculo(@PathParam("id") Integer id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;

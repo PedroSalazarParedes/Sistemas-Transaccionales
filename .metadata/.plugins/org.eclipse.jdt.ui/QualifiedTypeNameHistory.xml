@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonProperty"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
-<fullyQualifiedTypeName name="javax.ws.rs.POST"/>
-<fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
 <fullyQualifiedTypeName name="vos.Espectaculo"/>
 <fullyQualifiedTypeName name="dao.EspectaculoDAO"/>
 <fullyQualifiedTypeName name="vos.ListaCompanias"/>
-<fullyQualifiedTypeName name="javax.ws.rs.GET"/>
-<fullyQualifiedTypeName name="vos.ListaLocalidades"/>
 <fullyQualifiedTypeName name="vos.Localidad"/>
-<fullyQualifiedTypeName name="vos.Funcion"/>
 <fullyQualifiedTypeName name="dao.FuncionDAO"/>
 <fullyQualifiedTypeName name="dao.LugarDAO"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="tm.FestivAndesMaster"/>
 <fullyQualifiedTypeName name="vos.ListaEspectaculos"/>
+<fullyQualifiedTypeName name="dao.ConsultasDAO"/>
+<fullyQualifiedTypeName name="javax.ws.rs.QueryParam"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="vos.Usuario"/>
+<fullyQualifiedTypeName name="vos.CompaniaTeatro"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
+<fullyQualifiedTypeName name="vos.Lugar"/>
+<fullyQualifiedTypeName name="vos.ListaLocalidades"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="vos.Funcion"/>
+<fullyQualifiedTypeName name="vos.LocalidadesDetail"/>
+<fullyQualifiedTypeName name="javax.ws.rs.POST"/>
+<fullyQualifiedTypeName name="vos.Boleta"/>
+<fullyQualifiedTypeName name="javax.ws.rs.GET"/>
+<fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
 </qualifiedTypeNameHistroy>

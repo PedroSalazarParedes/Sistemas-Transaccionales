@@ -42,6 +42,7 @@ public class CompaniaServices {
 	
 	@GET 
 	@Path("/{compania}")
+	@Produces({ MediaType.TEXT_PLAIN })
 	public Response consultarCompanias(String compania) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;

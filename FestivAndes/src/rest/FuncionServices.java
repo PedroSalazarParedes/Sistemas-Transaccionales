@@ -54,7 +54,14 @@ public class FuncionServices {
 	}
 	
 	@GET
+	@Produces({ MediaType.TEXT_PLAIN })
+	public Response test() {
+		return Response.status(200).entity("hola!").build();
+	}
+	
+	@GET
 	@Path("/reporte/{id: \\d+}")
+	@Produces({ MediaType.TEXT_PLAIN })
 	public Response reporteFuncion(@PathParam("id") Integer id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;

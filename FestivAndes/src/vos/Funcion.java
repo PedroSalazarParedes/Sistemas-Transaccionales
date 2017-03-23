@@ -12,34 +12,34 @@ public class Funcion
 	/**
 	 * Id del espectaculo
 	 */
-	@JsonProperty(value="id")
+	@JsonProperty(value="idFuncion")
 	private Long id;
 
 	/**
 	 * Nombre del espectaculo
 	 */
-	@JsonProperty(value="fecha")
+	@JsonProperty(value="fechaFuncion")
 	private String fecha;
 
 	/**
 	 * DuraciÃ³n en minutos del espectaculo
 	 */
-	@JsonProperty(value="hora")
+	@JsonProperty(value="horaFuncion")
 	private String hora;
 	
 
 	
 
 	/**
-	 * Requerimientos técnicos del espectaculo
+	 * Requerimientos tï¿½cnicos del espectaculo
 	 */
-	@JsonProperty(value="idlugar")
+	@JsonProperty(value="idlugarFuncion")
 	private Long idlugar;
 
 	/**
 	 * Id de la categoria del espectaculo
 	 */
-	@JsonProperty(value="idespectaculo")
+	@JsonProperty(value="idespectaculoFuncion")
 	private Long idespectaculo;
 
 

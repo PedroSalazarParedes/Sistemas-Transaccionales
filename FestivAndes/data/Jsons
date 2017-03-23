@@ -1,0 +1,272 @@
+Boleta-----------------------------
+
+[{
+  "idfuncionBoleta": 1,
+  "valorBoleta": 56.24,
+  "idlocalidadBoleta": 1,
+  "numfilaBoleta": 1,
+  "numsillaBoleta": 1
+}, {
+  "idfuncionBoleta": 2,
+  "valorBoleta": 81.69,
+  "idlocalidadBoleta": 2,
+  "numfilaBoleta": 2,
+  "numsillaBoleta": 2
+}, {
+  "idfuncionBoleta": 3,
+  "valorBoleta": 51.64,
+  "idlocalidadBoleta": 3,
+  "numfilaBoleta": 3,
+  "numsillaBoleta": 3
+}, {
+  "idfuncionBoleta": 4,
+  "valorBoleta": 90.83,
+  "idlocalidadBoleta": 4,
+  "numfilaBoleta": 4,
+  "numsillaBoleta": 4
+}, {
+  "idfuncionBoleta": 5,
+  "valorBoleta": 18.95,
+  "idlocalidadBoleta": 5,
+  "numfilaBoleta": 5,
+  "numsillaBoleta": 5
+}]
+
+Compania teatro-----------------------------
+
+[{
+  "idCompania": 33,
+  "nameEspecCompania": "Abatz",
+  "representanteCompania": "Sean Evans",
+  "paginaWebCompania": "https://merriam-webster.com",
+  "paisCompania": "Japan"
+}, {
+  "idCompania": 47,
+  "nameEspecCompania": "Brainbox",
+  "representanteCompania": "Carolyn Stone",
+  "paginaWebCompania": "https://freewebs.com",
+  "paisCompania": "Russia"
+}, {
+  "idCompania": 82,
+  "nameEspecCompania": "Jabbersphere",
+  "representanteCompania": "Chris Pierce",
+  "paginaWebCompania": "http://blinklist.com",
+  "paisCompania": "Kazakhstan"
+}, {
+  "idCompania": 34,
+  "nameEspecCompania": "Jetpulse",
+  "representanteCompania": "Earl Gibson",
+  "paginaWebCompania": "http://comcast.net",
+  "paisCompania": "Portugal"
+}, {
+  "idCompania": 62,
+  "nameEspecCompania": "Brainbox",
+  "representanteCompania": "Diane Rose",
+  "paginaWebCompania": "https://nymag.com",
+  "paisCompania": "Canada"
+}]
+
+Espectaculo-----------------------------
+
+[{
+  "idEspactaculo": 1,
+  "nameEspactaculo": "COLLAGEN HD MAKE UP BASE",
+  "durationEspactaculo": 44,
+  "costEspactaculo": 25.64,
+  "participationEspectaculo": 1,
+  "descriptionEspectaculo": "convallis duis consequat dui nec nisi volutpat eleifend donec ut",
+  "objetivoEspactaculo": "turpis",
+  "idiomaEspectaculo": "Hungarian",
+  "reqtecnicosEspectaculo": "donec diam",
+  "idcategoriaEspactaculo": 2
+}, {
+  "idEspactaculo": 2,
+  "nameEspactaculo": "VIMIZIM",
+  "durationEspactaculo": 22,
+  "costEspactaculo": 46.64,
+  "participationEspectaculo": 1,
+  "descriptionEspectaculo": "lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed",
+  "objetivoEspactaculo": "convallis",
+  "idiomaEspectaculo": "Persian",
+  "reqtecnicosEspectaculo": "lacus",
+  "idcategoriaEspactaculo": 1
+}, {
+  "idEspactaculo": 3,
+  "nameEspactaculo": "Bumetanide",
+  "durationEspactaculo": 46,
+  "costEspactaculo": 22.32,
+  "participationEspectaculo": 1,
+  "descriptionEspectaculo": "mi integer ac neque duis bibendum morbi non quam nec",
+  "objetivoEspactaculo": "ac",
+  "idiomaEspectaculo": "Croatian",
+  "reqtecnicosEspectaculo": "magna vulputate",
+  "idcategoriaEspactaculo": 5
+}, {
+  "idEspactaculo": 4,
+  "nameEspactaculo": "AGARICINUM",
+  "durationEspactaculo": 18,
+  "costEspactaculo": 79.52,
+  "participationEspectaculo": 1,
+  "descriptionEspectaculo": "praesent id massa id nisl venenatis lacinia aenean sit amet",
+  "objetivoEspactaculo": "convallis",
+  "idiomaEspectaculo": "Gujarati",
+  "reqtecnicosEspectaculo": "vestibulum velit",
+  "idcategoriaEspactaculo": 3
+}, {
+  "idEspactaculo": 5,
+  "nameEspactaculo": "Venlafaxine Hydrochloride",
+  "durationEspactaculo": 64,
+  "costEspactaculo": 46.46,
+  "participationEspectaculo": 0,
+  "descriptionEspectaculo": "ultrices aliquet maecenas leo odio condimentum id luctus nec molestie",
+  "objetivoEspactaculo": "eu",
+  "idiomaEspectaculo": "Greek",
+  "reqtecnicosEspectaculo": "congue",
+  "idcategoriaEspactaculo": 4
+}]
+
+Funcion-----------------------------
+
+[{
+  "idFuncion": 1,
+  "fechaFuncion": "2016-12-31 06:44:07",
+  "horaFuncion": "06:44:07",
+  "idlugarFuncion": 2,
+  "idespectaculoFuncion": 5
+}, {
+  "idFuncion": 2,
+  "fechaFuncion": "2017-01-25 10:17:54",
+  "horaFuncion": "10:17:54",
+  "idlugarFuncion": 4,
+  "idespectaculoFuncion": 4
+}, {
+  "idFuncion": 3,
+  "fechaFuncion": "2016-11-29 01:08:08",
+  "horaFuncion": "01:08:08",
+  "idlugarFuncion": 1,
+  "idespectaculoFuncion": 3
+}, {
+  "idFuncion": 4,
+  "fechaFuncion": "2016-10-21 07:16:16",
+  "horaFuncion": "7:16:16",
+  "idlugarFuncion": 5,
+  "idespectaculoFuncion": 1
+}, {
+  "idFuncion": 5,
+  "fechaFuncion": "2016-11-09 00:07:56",
+  "horaFuncion": "00:07:56",
+  "idlugarFuncion": 4,
+  "idespectaculoFuncion": 5
+}]
+
+Localidad-----------------------------
+
+[{
+  "idLocalidad": 1,
+  "nameLocalidad": "sem mauris",
+  "idlugarLocalidad": 1,
+  "capacityLocalidad": 2359,
+  "numfilasLocalidad": 1759,
+  "numsillasLocalidad": 4649
+}, {
+  "idLocalidad": 2,
+  "nameLocalidad": "maecenas",
+  "idlugarLocalidad": 2,
+  "capacityLocalidad": 1776,
+  "numfilasLocalidad": 2879,
+  "numsillasLocalidad": 2932
+}, {
+  "idLocalidad": 3,
+  "nameLocalidad": "at",
+  "idlugarLocalidad": 3,
+  "capacityLocalidad": 2489,
+  "numfilasLocalidad": 3496,
+  "numsillasLocalidad": 4277
+}, {
+  "idLocalidad": 4,
+  "nameLocalidad": "faucibus cursus",
+  "idlugarLocalidad": 4,
+  "capacityLocalidad": 417,
+  "numfilasLocalidad": 4027,
+  "numsillasLocalidad": 1503
+}, {
+  "idLocalidad": 5,
+  "nameLocalidad": "urna",
+  "idlugarLocalidad": 5,
+  "capacityLocalidad": 2399,
+  "numfilasLocalidad": 4352,
+  "numsillasLocalidad": 3560
+}]
+
+Lugar-----------------------------
+
+[{
+  "idLugar": 1,
+  "nameLugar": "dapibus",
+  "tipoLugar": "montes",
+  "capacityLugar": 122,
+  "silleteriaLugar": "blandit non interdum",
+  "proteccionLugar": 0,
+  "condtecnicasLugar": "leo maecenas pulvinar lobortis est phasellus sit"
+}, {
+  "idLugar": 2,
+  "nameLugar": "viverra",
+  "tipoLugar": "id nulla",
+  "capacityLugar": 1015,
+  "silleteriaLugar": "ligula",
+  "proteccionLugar": 1,
+  "condtecnicasLugar": "porttitor lacus at turpis"
+}, {
+  "idLugar": 3,
+  "nameLugar": "tincidunt",
+  "tipoLugar": "vel",
+  "capacityLugar": 2812,
+  "silleteriaLugar": "nulla suspendisse potenti",
+  "proteccionLugar": 1,
+  "condtecnicasLugar": "lacus"
+}, {
+  "idLugar": 4,
+  "nameLugar": "aliquet",
+  "tipoLugar": "pede",
+  "capacityLugar": 3839,
+  "silleteriaLugar": "turpis sed ante vivamus tortor",
+  "proteccionLugar": 1,
+  "condtecnicasLugar": "mi pede malesuada in imperdiet et commodo"
+}, {
+  "idLugar": 5,
+  "nameLugar": "adipiscing",
+  "tipoLugar": "praesent blandit",
+  "capacityLugar": 2915,
+  "silleteriaLugar": "eleifend pede libero quis",
+  "proteccionLugar": 1,
+  "condtecnicasLugar": "semper sapien a libero nam"
+}]
+
+Usuario-----------------------------
+
+[{
+  "idUsuario": 1,
+  "nameUsuario": "Angela Lopez",
+  "emailUsuario": "alopez0@jigsy.com",
+  "rolUsuario": "Cliente"
+}, {
+  "idUsuario": 2,
+  "nameUsuario": "Marie Little",
+  "emailUsuario": "mlittle1@about.me",
+  "rolUsuario": "Organizador"
+}, {
+  "idUsuario": 3,
+  "nameUsuario": "Phillip Flores",
+  "emailUsuario": "pflores2@discovery.com",
+  "rolUsuario": "Cliente"
+}, {
+  "idUsuario": 4,
+  "nameUsuario": "Terry Sullivan",
+  "emailUsuario": "tsullivan3@tinypic.com",
+  "rolUsuario": "Organizador"
+}, {
+  "idUsuario": 5,
+  "nameUsuario": "Sarah Murray",
+  "emailUsuario": "smurray4@godaddy.com",
+  "rolUsuario": "Operador"
+}]

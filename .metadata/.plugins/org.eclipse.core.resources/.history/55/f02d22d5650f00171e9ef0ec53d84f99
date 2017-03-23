@@ -1,0 +1,31 @@
+[{
+  "idfuncionBoleta": 86,
+  "valorBoleta": 56.24,
+  "idlocalidadBoleta": 1,
+  "numfilaBoleta": 1,
+  "numsillaBoleta": 1
+}, {
+  "idfuncionBoleta": 2,
+  "valorBoleta": 81.69,
+  "idlocalidadBoleta": 2,
+  "numfilaBoleta": 2,
+  "numsillaBoleta": 2
+}, {
+  "idfuncionBoleta": 92,
+  "valorBoleta": 51.64,
+  "idlocalidadBoleta": 3,
+  "numfilaBoleta": 3,
+  "numsillaBoleta": 3
+}, {
+  "idfuncionBoleta": 41,
+  "valorBoleta": 90.83,
+  "idlocalidadBoleta": 4,
+  "numfilaBoleta": 4,
+  "numsillaBoleta": 4
+}, {
+  "idfuncionBoleta": 76,
+  "valorBoleta": 18.95,
+  "idlocalidadBoleta": 5,
+  "numfilaBoleta": 5,
+  "numsillaBoleta": 5
+}]
