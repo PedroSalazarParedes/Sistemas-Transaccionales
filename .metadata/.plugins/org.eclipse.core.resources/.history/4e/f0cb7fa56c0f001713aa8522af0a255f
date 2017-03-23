@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import vos.Boleta;
 
-
 public class BoletaDAO {
 
 	private ArrayList<Object> resources;
@@ -67,7 +66,7 @@ public class BoletaDAO {
 		ResultSet rs = prepStmt.executeQuery();
 		if(!rs.next())
 		{
-			throw new Exception("No se registrï¿½ correctamente la compra de la boleta");
+			throw new Exception("No se registró correctamente la compra de la boleta");
 		}
 	}
 

@@ -321,7 +321,7 @@ public class FestivAndesMaster {
 			{
 				if(l.getId()==null)
 				{
-					dao.addBoleta(fun,det.getValores().get(0),num);
+					dao.addBoleta(fun, det.getValores().get(0),num);
 					num++;
 				}
 				else
@@ -487,14 +487,14 @@ public class FestivAndesMaster {
 	}
 	
 	//RFC2
-	public String consultarLugares(Integer idLugar,String criterio) throws Exception {
+	public String consultarLugares(String criterio) throws Exception {
 		ConsultasDAO dao = new ConsultasDAO();
 		try 
 		{
 			//////Transaccion
 			this.conn = darConexion();
 			dao.setConnection(conn);
-			String s = dao.consultarLugares(idLugar,criterio);
+			String s = dao.consultarLugares(criterio);
 			conn.commit();
 			return s;
 

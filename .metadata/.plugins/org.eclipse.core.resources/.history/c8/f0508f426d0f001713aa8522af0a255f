@@ -2,10 +2,8 @@ package rest;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -29,21 +27,6 @@ public class LugarServices {
 	private String buildErrorMessage(Exception e) {
 		return "{ \"ERROR\": \"" + e.getMessage() + "\"}";
 	}
-	
-	@GET
-	@Path("/consultar/{id: \\d+}/{criterio}")
-	@Produces({ MediaType.TEXT_PLAIN })
-	public Response consultarLugar(@PathParam("id") Integer id, @PathParam("criterio") String criterio) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		String s;
-		try {
-			s = master.consultarLugares(id, criterio);
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(s).build();
-	}
-	
 	
 	@POST
 	public Response addLugar(Lugar lugar, ListaLocalidades list) {
