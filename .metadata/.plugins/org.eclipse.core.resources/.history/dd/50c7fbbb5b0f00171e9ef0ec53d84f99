@@ -84,9 +84,8 @@ public class ConsultasDAO {
 
 	}
 
-	public String consultarRentabilidadCompanias(String compania) {
-		String s = "";
-		return s;
+	public void consultarRentabilidadCompanias() {
+
 	}
 
 	public ArrayList<Espectaculo> getEspectaculosPopulares(String fechaInic,
@@ -138,14 +137,5 @@ public class ConsultasDAO {
 
 		return e;
 
-	}
-	
-	public String consultarFunciones(String criterio) {
-		String s = "";
-		return s;
-	}
-	public String consultarLugares(String criterio) {
-		String s = "";
-		return s;
 	}
 }

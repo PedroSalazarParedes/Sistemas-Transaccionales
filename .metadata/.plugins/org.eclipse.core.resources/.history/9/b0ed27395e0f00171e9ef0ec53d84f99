@@ -46,7 +46,7 @@ public class CompaniaServices {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;
 		try {
-			s = master.consultarRentabilidad(compania);
+			s = master.consultarRentabilidad(s);
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}

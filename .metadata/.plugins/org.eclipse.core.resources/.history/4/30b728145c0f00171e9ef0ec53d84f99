@@ -84,7 +84,7 @@ public class ConsultasDAO {
 
 	}
 
-	public String consultarRentabilidadCompanias(String compania) {
+	public String consultarRentabilidadCompanias() {
 		String s = "";
 		return s;
 	}
