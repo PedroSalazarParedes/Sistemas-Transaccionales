@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonProperty"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="vos.Espectaculo"/>
 <fullyQualifiedTypeName name="dao.EspectaculoDAO"/>
@@ -24,7 +23,8 @@
 <fullyQualifiedTypeName name="vos.Funcion"/>
 <fullyQualifiedTypeName name="vos.LocalidadesDetail"/>
 <fullyQualifiedTypeName name="javax.ws.rs.POST"/>
+<fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonProperty"/>
 <fullyQualifiedTypeName name="vos.Boleta"/>
 <fullyQualifiedTypeName name="javax.ws.rs.GET"/>
-<fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
 </qualifiedTypeNameHistroy>

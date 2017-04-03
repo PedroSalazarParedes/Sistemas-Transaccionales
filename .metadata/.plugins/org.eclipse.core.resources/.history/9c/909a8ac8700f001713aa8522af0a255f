@@ -1,18 +1,18 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.CompaniaTeatro;
 
-public class CompaniaDAO {
+import vos.Usuario;
+
+public class UsuarioDAO {
 
 	private ArrayList<Object> resources;
 	private Connection connection;
 
-	public CompaniaDAO() {
+	public UsuarioDAO() {
 		resources = new ArrayList<Object>();
 	}
 	
@@ -32,17 +32,17 @@ public class CompaniaDAO {
 	}
 	
 
-	public void addCompania(CompaniaTeatro compania) throws SQLException, Exception {
+	public void addUsuario(Usuario usuario) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ISIS2304B241710.COMPANIA_TEATRO VALUES (";
-		sql += compania.getId() + ",'";
-		sql += compania.getName() + "','";
-		sql += compania.getRepresentante() + "','";
-		sql += compania.getPaginaWeb() + "','";
-		sql += compania.getPais() + "')";
+		String sql = "INSERT INTO USUARIO VALUES (";
+		sql += usuario.getId() + ",'";
+		sql += usuario.getName() + "','";
+		sql += usuario.getEmail() + "','";
+		sql += usuario.getRol() + "')";
+		
 		
 
-		//System.out.println("SQL stmt:" + sql);
+		System.out.println("SQL stmt:" + sql);
 
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
@@ -50,4 +50,6 @@ public class CompaniaDAO {
 
 	}
 	
+
 }
+

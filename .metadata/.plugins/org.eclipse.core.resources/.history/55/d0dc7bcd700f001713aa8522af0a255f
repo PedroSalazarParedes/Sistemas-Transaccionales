@@ -37,7 +37,7 @@ public class EspectaculoDAO {
 
 	public void addEspectaculo(Espectaculo espectaculo) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ISIS2304B241710.ESPECTACULO VALUES (";
+		String sql = "INSERT INTO ESPECTACULO VALUES (";
 		sql += espectaculo.getId() + ",'";
 		sql += espectaculo.getName() + "',";
 		sql += espectaculo.getDuration() + ",";
@@ -62,7 +62,7 @@ public class EspectaculoDAO {
 	
 	public void addRealizadoPor(Espectaculo espe, CompaniaTeatro comp) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ISIS2304B241710.REALIZADO_POR VALUES (";
+		String sql = "INSERT INTO REALIZADO_POR VALUES (";
 		sql += espe.getId() + ",";
 		sql += comp.getId() + ")";
 		
@@ -77,7 +77,16 @@ public class EspectaculoDAO {
 	}
 	
 
+    //RFC6	
 	
-
+	public ArrayList<Espectaculo> getEspectaculos() throws SQLException, Exception{
+		ArrayList<Espectaculo> e = new ArrayList<>();
+		String sql = "Select * From Espectaculo";
+		//no sée!
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		prepStmt.executeQuery();
+		return e;
+	}
 
 }

@@ -51,41 +51,85 @@ public class ConsultasDAO {
 			Exception {
 		String str = "";
 		String sql = "SELECT nombre_localidad, cliente, SUM(valor) producido, COUNT(*) boletas_vendidas "
-				+ "FROM (BOLETA NATURAL INNER JOIN LOCALIDAD) "
+				+ "FROM (ISIS2304B241710.BOLETA NATURAL INNER JOIN ISIS2304B241710.LOCALIDAD) "
 				+ "WHERE id_funcion = "
 				+ id
 				+ " GROUP BY id_localidad, nombre_localidad, cliente"
 				+ " ORDER BY nombre_localidad";
 
-		//System.out.println("SQL stmt:" + sql);
+		// System.out.println("SQL stmt:" + sql);
 
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
-		prepStmt.executeQuery();
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			if (rs.getString("CLIENTE") == "0") {
+				str += "Nombre localidad: " + rs.getString("NOMBRE_LOCALIDAD")
+						+ ", Usuario: No registrado, Valor producido: "
+						+ rs.getString("PRODUCIDO")
+						+ ", Numero de boletas vendidas: "
+						+ rs.getString("BOLETAS_VENDIDAS") + "\n";
+			} else {
+				str += "Nombre localidad: " + rs.getString("NOMBRE_LOCALIDAD")
+						+ ", Usuario: Cliente, Valor producido: "
+						+ rs.getString("PRODUCIDO")
+						+ ", Numero de boletas vendidas: "
+						+ rs.getString("BOLETAS_VENDIDAS") + "\n";
+			}
+		}
 		return str;
 
 	}
 
-	public String generarReporteEspectaculo(Integer id)
-			throws SQLException, Exception {
+	public String generarReporteEspectaculo(Integer id) throws SQLException,
+			Exception {
 		String str = "";
-		String sql = "SELECT id_funcion, nombre_lugar, sum(valor) producido, count(*) boletas_vendidas, count(*)/capacidad porcentaje_ocupacion"
+		String sql = "SELECT id_funcion, nombre_lugar, cliente, sum(valor) producido, count(*) boletas_vendidas, count(*)/capacidad porcentaje_ocupacion"
+				+ " FROM (ISIS2304B241710.FUNCION NATURAL INNER JOIN (ISIS2304B241710.BOLETA NATURAL INNER JOIN ISIS2304B241710.LOCALIDAD)) NATURAL INNER JOIN ISIS2304B241710.LUGAR"
 				+ " WHERE id_espectaculo = "
 				+ id
 				+ " GROUP BY id_funcion, nombre_lugar, capacidad, cliente"
 				+ " ORDER BY nombre_lugar, id_funcion";
 
-		//System.out.println("SQL stmt:" + sql);
+		// System.out.println("SQL stmt:" + sql);
 
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
-		prepStmt.executeQuery();
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			if (rs.getString("CLIENTE") == "0") {
+				str += "Id función: " + rs.getString("ID_FUNCION")
+						+ ", Nombre lugar " + rs.getString("NOMBRE_LUGAR")
+						+ ", Usuario: No registrado, Valor producido: "
+						+ rs.getString("PRODUCIDO")
+						+ ", Numero de boletas vendidas: "
+						+ rs.getString("BOLETAS_VENDIDAS")
+						+ ", Porcentaje de ocupación: "
+						+ rs.getString("porcentaje_ocupacion") + "\n";
+			} else {
+				str += "Id función: " + rs.getString("ID_FUNCION")
+						+ ", Nombre lugar " + rs.getString("NOMBRE_LUGAR")
+						+ ", Usuario: Cliente, Valor producido: "
+						+ rs.getString("PRODUCIDO")
+						+ ", Numero de boletas vendidas: "
+						+ rs.getString("BOLETAS_VENDIDAS")
+						+ ", Porcentaje de ocupación: "
+						+ rs.getString("porcentaje_ocupacion") + "\n";
+			}
+		}
 		return str;
 
 	}
 
 	public String consultarRentabilidadCompanias(String compania) {
 		String s = "";
+		if (compania.equals("All")) {
+
+		} else {
+
+		}
 		return s;
 	}
 
@@ -93,9 +137,9 @@ public class ConsultasDAO {
 			String fechaFin) throws SQLException, Exception {
 		ArrayList<Espectaculo> e = new ArrayList<>();
 		String sql = "SELECT E.id_espectaculo, nombre_espectaculo duracion, costo_realizacion, participacion_publico, descripcion, idioma, tipo_traduccion, req_tecnicos, id_categoria"
-				+ " FROM ESPECTACULO E, FUNCION F"
+				+ " FROM ISIS2304B241710.ESPECTACULO E, ISIS2304B241710.FUNCION F"
 				+ " WHERE E.id_espectaculo=F.id_espectaculo"
-				+ " AND realizado=1"
+				+ " AND realizado = 1"
 				+ " AND HORA < '"
 				+ fechaFin
 				+ "' AND HORA > '"
@@ -104,7 +148,7 @@ public class ConsultasDAO {
 				+ " GROUP BY E.id_espectaculo, nombre_espectaculo, duracion, costo_realizacion, participacion_publico, descripcion, idioma, tipo_traduccion, req_tecnicos, id_categoria"
 				+ " HAVING SUM(num_asistentes)= (SELECT MAX(total_asistentes)"
 				+ " FROM (SELECT E.id_espectaculo, SUM(num_asistentes) total_asistentes"
-				+ " FROM ESPECTACULO E, FUNCION F"
+				+ " FROM ISIS2304B241710.ESPECTACULO E, ISIS2304B241710.FUNCION F"
 				+ " WHERE E.id_espectaculo=F.id_espectaculo"
 				+ " AND realizado=1"
 				+ " AND HORA < '"
@@ -139,13 +183,61 @@ public class ConsultasDAO {
 		return e;
 
 	}
-	
-	public String consultarFunciones(String criterio) {
+
+	public String consultarFunciones(String criterio) throws SQLException,
+			Exception {
 		String s = "";
+		String sql = "SELECT id_funcion, hora, realizado, num_asistentes, id_lugar, id_espectaculo"
+				+ " FROM ((ISIS2304B241710.ESPECTACULO NATURAL INNER JOIN ISIS2304B241710.FUNCION) NATURAL INNER JOIN (ISIS2304B241710.COMPANIA_TEATRO NATURAL INNER JOIN ISIS2304B241710.REALIZADO_POR)) NATURAL INNER JOIN (ISIS2304B241710.CATEGORIA NATURAL INNER JOIN ISIS2304B241710.CATEGORIA_ESPECTACULO)"
+				+ " ORDER BY " + criterio;
+
+		// System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+
+			s += "Id función: " + rs.getString("ID_FUNCION") + ", Fecha "
+					+ rs.getString("HORA") + ", Realizado: "
+					+ rs.getString("REALIZADO") + ", Numero de asistentes: "
+					+ rs.getString("NUM_ASISTENTES") + ", Id lugar: "
+					+ rs.getString("id_lugar") + "\n";
+
+		}
 		return s;
 	}
-	public String consultarLugares(String criterio) {
+
+	public String consultarLugares(Integer id, String criterio)
+			throws SQLException, Exception {
 		String s = "";
+		String sql = "SELECT id_funcion, hora, realizado, num_asistentes, id_lugar, id_espectaculo, nombre_localidad, valor, count(*) boleteria"
+				+ " FROM ((ISIS2304B241710.BOLETA NATURAL INNER JOIN ISIS2304B241710.FUNCION) NATURAL INNER JOIN ISIS2304B241710.ESPECTACULO) NATURAL INNER JOIN ISIS2304B241710.LUGAR"
+				+ " WHERE ID_LUGAR = "
+				+ id
+				+ " AND disponible = 1"
+				+ " GROUP BY id_funcion, hora, realizado, num_asistentes, id_lugar, id_espectaculo, nombre_localidad, valor"
+				+ " ORDER BY " + criterio;
+
+		// System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+
+			s += "Id función: " + rs.getString("ID_FUNCION") + ", Fecha "
+					+ rs.getString("HORA") + ", Realizado: "
+					+ rs.getString("REALIZADO") + ", Numero de asistentes: "
+					+ rs.getString("NUM_ASISTENTES") + ", Id lugar: "
+					+ rs.getString("id_lugar") + ", Nombre localidad: "
+					+ rs.getString("NOMBRE_LOCALIDAD") + ", Valor: "
+					+ rs.getString("VALOR") + ", Boleteria disponible: "
+					+ rs.getString("BOLETERIA") + "\n";
+
+		}
 		return s;
 	}
 }

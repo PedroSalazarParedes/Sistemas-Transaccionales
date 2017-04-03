@@ -34,7 +34,7 @@ public class UsuarioDAO {
 
 	public void addUsuario(Usuario usuario) throws SQLException, Exception {
 
-		String sql = "INSERT INTO USUARIO VALUES (";
+		String sql = "INSERT INTO ISIS2304B241710.USUARIO VALUES (";
 		sql += usuario.getId() + ",'";
 		sql += usuario.getName() + "','";
 		sql += usuario.getEmail() + "','";

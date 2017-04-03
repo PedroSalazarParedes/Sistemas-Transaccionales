@@ -36,7 +36,7 @@ public class LugarDAO {
 
 	public void addLugar(Lugar lugar) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ISIS2304B241710.LUGAR VALUES (";
+		String sql = "INSERT INTO LUGAR VALUES (";
 		sql += lugar.getId() + ",'";
 		sql += lugar.getName() + "','";
 		sql += lugar.getTipo() + "',";
@@ -60,7 +60,7 @@ public class LugarDAO {
 	public Lugar buscarLugarPorId(Long id) throws SQLException, Exception {
 		Lugar lug = null;
 
-		String sql = "SELECT * FROM ISIS2304B241710.LUGAR WHERE ID_LUGAR =" + id ;
+		String sql = "SELECT * FROM LUGAR WHERE ID_LUGAR =" + id ;
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -86,7 +86,7 @@ public class LugarDAO {
 	
 	public void addLocalidad(Localidad loc) throws SQLException, Exception {
 
-		String sql = "INSERT INTO ISIS2304B241710.LOCALIDAD VALUES (";
+		String sql = "INSERT INTO LOCALIDAD VALUES (";
 		sql += loc.getId() + ",'";
 		sql += loc.getName() + "',";
 		sql += loc.getIdlugar() + ",";
@@ -106,7 +106,7 @@ public class LugarDAO {
 	public Localidad buscarLocalidadPorNombreYLugar(String name, Long idlugar) throws SQLException, Exception {
 		Localidad lug = null;
 
-		String sql = "SELECT * FROM ISIS2304B241710.LOCALIDAD WHERE ID_LUGAR =" + idlugar + " AND NOMBRE_LOCALIDAD='"+name+"'" ;
+		String sql = "SELECT * FROM LOCALIDAD WHERE ID_LUGAR =" + idlugar + " AND NOMBRE_LOCALIDAD='"+name+"'" ;
 
 		System.out.println("SQL stmt:" + sql);
 

@@ -111,6 +111,42 @@ public class FestivAndesMaster {
 	////////////////////////////////////////
 	///////Transacciones////////////////////
 	////////////////////////////////////////
+	
+	
+	//RFC6
+	public ListaEspectaculos getEspectaculos() throws Exception{
+		EspectaculoDAO dao = new EspectaculoDAO();
+		ArrayList<Espectaculo> lista = null;
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			lista  = dao.getEspectaculos();
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaEspectaculos(lista);
+	}
+
 	////////////////////////////////////////
 	///////Requerimientos///////////////////
 	////////////////////////////////////////
