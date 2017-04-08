@@ -4,9 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import vos.Boleta;
+import vos.Funcion;
+import vos.Localidad;
 
 
 public class BoletaDAO {
@@ -32,7 +38,32 @@ public class BoletaDAO {
 				}
 		}
 	}
+	/**
+	 * Método que registra como compradas un grupo de boletas pasadas como parametro en la base de datos.
+	 * @param boletas- el boletas a agregar.
+	 * <b> post: </b> se han registrado las boletas a la base de datos en la transaction actual. pendiente que el festival master
+	 * haga commit para que el boleta baje  a la base de datos.
+	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
+	 * @throws Exception - Cualquier error que no corresponda a la base de datos
+	 */
+	public void registrarCompraMultiplesBoletas(List<Boleta> boletas, int cliente) throws SQLException, Exception {
+		for(Boleta b : boletas) {
+			registrarBoletaComprada(b, cliente);
+		}
+	}
 	
+	public void devolverBoleta(Boleta b) {
+		
+	}
+	
+	public void registrarCompraAbono(List<Funcion> funciones, List<Localidad> localidades ) {
+		Date d = new Date();
+		DateFormat df = new SimpleDateFormat("AAAA-MM-DD HH:mm:ss");
+		String s = df.format(d);
+		for (int i = 0;i<funciones.size();i++) {
+			
+		}
+	}
 	/**
 	 * Método que registra como comprada la boleta que entra como parámetro a la base de datos.
 	 * @param boleta- el boleta a agregar. video !=  null
@@ -60,7 +91,7 @@ public class BoletaDAO {
 				                             +" AND num_silla = "+boleta.getNumsilla()
 				                             +" AND disponible = 1";
 
-		System.out.println("SQL stmt:" + sql);
+		//System.out.println("SQL stmt:" + sql);
 
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);

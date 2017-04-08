@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
+
 public class LocalidadesDetail {
 
 	@JsonProperty(value = "nombresLocalidades")

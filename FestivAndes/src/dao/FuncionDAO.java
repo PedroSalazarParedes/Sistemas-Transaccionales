@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -138,6 +139,15 @@ public class FuncionDAO {
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
 		prepStmt.executeQuery();
+	}
+	
+	public String masBoletas() throws SQLException, Exception {
+		
+		String sql =""; //EL STATEMENT ESTÁ MAL PERO LA IDEA ES QUE RETORNE EL ID DE LA FUNCION CON MAS BOLETAS"SELECT COUNT(ID_FUNCION) FROM ISIS2304B241710.BOLETA WHERE ID_FUNCION = ID_FUNCION "
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		return rs.getString("ID_FUNCION");
 	}
 	
 	

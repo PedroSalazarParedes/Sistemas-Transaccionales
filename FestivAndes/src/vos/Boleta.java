@@ -46,6 +46,34 @@ public class Boleta
 	@JsonProperty(value="numsillaBoleta")
 	private Integer numsilla;
 
+	@JsonProperty(value="abonada")
+	private Boolean abonada;
+	
+	@JsonProperty(value="usuario")
+	private Integer usuario;
+	
+	
+	
+	public Integer getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Integer usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public Boolean getAbonada() {
+		return abonada;
+	}
+
+
+	public void setAbonada(Boolean abonada) {
+		this.abonada = abonada;
+	}
+
+
 	/**
 	 * Método constructor de la clase espectaculo
 	 * <b>post: </b> Crea el espectaculo con los valores que entran como parámetro
@@ -55,13 +83,15 @@ public class Boleta
 	 */
 	public Boleta(@JsonProperty(value="idBoleta")Long idfuncion, @JsonProperty(value="valorBoleta")double valor,
 			 @JsonProperty(value="idlocalidadBoleta") Long idlocalidad, @JsonProperty(value="numfilaBoleta") Integer numfila,
-			 @JsonProperty(value="numsillaBoleta") Integer numsilla) {
+			 @JsonProperty(value="numsillaBoleta") Integer numsilla,  @JsonProperty(value="abonada") Boolean abonada,  @JsonProperty(value="usuario") Integer usuario) {
 		super();
 		this.idfuncion = idfuncion;
 		this.valor = valor;
 		this.numsilla = numsilla;
 		this.idlocalidad = idlocalidad;
 		this.numfila = numfila;
+		this.abonada = abonada;
+		this.usuario = usuario;
 	}
 	
 	

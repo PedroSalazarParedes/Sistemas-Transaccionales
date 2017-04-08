@@ -1,5 +1,7 @@
 package rest;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -45,11 +47,23 @@ public class BoletaServices {
 	public Response VenderBoleta(Boleta b,@PathParam("cliente") Integer id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
-			master.registrarBoletaComprada(b, 1);
+			master.registrarBoletaComprada(b, id);
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(b).build();
+	}
+	
+	@POST
+	@Path("/{cliente}")
+	public Response venderMultiplesBoletas(List<Boleta>boletas, @PathParam("cliente") Integer id) {
+		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		try {
+			master.registrarBoletasComprada(boletas, id); //falta implementar el metodo
+		} catch (Exception e) {
+			return Response.status(500).entity(buildErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(boletas).build();
 	}
 	
 }

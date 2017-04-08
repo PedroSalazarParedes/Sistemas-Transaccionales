@@ -117,7 +117,6 @@ public class FestivAndesMaster {
 
 	//RF4
 	
-
 	public void addEspectaculo(Espectaculo espectaculo, ListaCompanias list) throws Exception {
 		EspectaculoDAO dao = new EspectaculoDAO();
 		try 
@@ -593,6 +592,39 @@ public class FestivAndesMaster {
 			String s = dao.generarReporteEspectaculo(id);
 			conn.commit();
 			return s;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	public String masBoletas() throws SQLException, Exception {
+		FuncionDAO dao = new FuncionDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			String f;
+			f = dao.masBoletas();
+			conn.commit();
+			return f;
 
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
