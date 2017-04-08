@@ -43,11 +43,25 @@ public class CompaniaServices {
 	@GET 
 	@Path("/{compania}")
 	@Produces({ MediaType.TEXT_PLAIN })
-	public Response consultarCompanias(String compania) {
+	public Response consultarCompanias(@PathParam("compania")String compania) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;
 		try {
 			s = master.consultarRentabilidad(compania);
+		} catch (Exception e) {
+			return Response.status(500).entity(buildErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(s).build();
+	}
+	
+	@GET
+	@Path("/info/{compania}")
+	@Produces({MediaType.TEXT_PLAIN})
+	public Response consultarInfoCompania(@PathParam("compania")String compania) {
+		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		String s;
+		try {
+			s = master.consultarInfoCompania(compania);//TODO
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}

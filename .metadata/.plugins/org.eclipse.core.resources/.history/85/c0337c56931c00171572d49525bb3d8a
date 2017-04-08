@@ -98,7 +98,7 @@ public class BoletaDAO {
 		ResultSet rs = prepStmt.executeQuery();
 		if(!rs.next())
 		{
-			throw new Exception("No se registró correctamente la compra de la boleta");
+			throw new Exception("No se registr� correctamente la compra de la boleta");
 		}
 	}
 

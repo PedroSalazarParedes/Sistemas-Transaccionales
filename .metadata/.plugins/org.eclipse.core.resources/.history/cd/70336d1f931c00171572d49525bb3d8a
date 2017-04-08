@@ -1,9 +1,8 @@
 package rest;
 
-import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,13 +12,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.FestivAndesMaster;
-import vos.Boleta;
+import vos.CompaniaTeatro;
 
-@Path("/boletas")
+@Path("/companias")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class BoletaServices {
-	
+public class CompaniaServices {
 	@Context
 	private ServletContext context;
 
@@ -32,40 +30,27 @@ public class BoletaServices {
 	}
 	
 	@POST
-	public Response venderBoleta(Boleta b) {
+	public Response addCompania(CompaniaTeatro compa) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
-			master.registrarBoletaComprada(b, 0);
+			master.addCompaniaTeatro(compa);
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(b).build();
+		return Response.status(200).entity(compa).build();
 	}
 	
-	@POST
-	@Path("/{cliente: \\d+}")
-	public Response VenderBoleta(Boleta b,@PathParam("cliente") Integer id) {
+	@GET 
+	@Path("/{compania}")
+	@Produces({ MediaType.TEXT_PLAIN })
+	public Response consultarCompanias(String compania) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		String s;
 		try {
-			master.registrarBoletaComprada(b, id);
+			s = master.consultarRentabilidad(compania);
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(b).build();
+		return Response.status(200).entity(s).build();
 	}
-	
-	@POST
-	@Path("/{cliente: \\d+}")
-	public Response venderMultiplesBoletas(List<Boleta>boletas, @PathParam("cliente") Integer id) {
-		FestivAndesMaster master = new FestivAndesMaster(getPath());
-		try {
-			master.registrarBoletasCompradas(boletas, id); //TODO falta implementar el metodo
-		} catch (Exception e) {
-			return Response.status(500).entity(buildErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(boletas).build();
-	}
-	
-	
-	
 }

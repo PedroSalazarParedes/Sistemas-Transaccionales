@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import dao.BoletaDAO;
@@ -646,41 +645,6 @@ public class FestivAndesMaster {
 				throw exception;
 			}
 		}
-	}
-
-	public String consultarInfoCompania(String compania) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void registrarBoletasCompradas(List<Boleta> boletas, Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void cancelarFuncion(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void asistenciasPorCliente(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void registrarAbono(Usuario usuario, List<Funcion> funciones) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void devolverBoleta(Usuario u, Boleta b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void devolverAbono(Usuario u, List<Boleta> abono) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 

@@ -43,7 +43,7 @@ public class BoletaServices {
 	}
 	
 	@POST
-	@Path("/{cliente: \\d+}")
+	@Path("/{cliente}")
 	public Response VenderBoleta(Boleta b,@PathParam("cliente") Integer id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
@@ -55,17 +55,15 @@ public class BoletaServices {
 	}
 	
 	@POST
-	@Path("/{cliente: \\d+}")
+	@Path("/{cliente}")
 	public Response venderMultiplesBoletas(List<Boleta>boletas, @PathParam("cliente") Integer id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
-			master.registrarBoletasCompradas(boletas, id); //TODO falta implementar el metodo
+			master.registrarBoletasComprada(boletas, id); //falta implementar el metodo
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(boletas).build();
 	}
-	
-	
 	
 }

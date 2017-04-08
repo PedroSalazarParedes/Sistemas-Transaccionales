@@ -85,5 +85,17 @@ public class FuncionServices {
 		}
 		return Response.status(200).entity(id).build();
 	}
+	
+	@GET
+	@Path("/asistencias/{cliente: \\d+}")
+	public Response asistenciasPorCliente(@PathParam("cliente") Integer id) {
+		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		try {
+			master.asistenciasPorCliente(id);//TODO 
+		} catch (Exception e) {
+			return Response.status(500).entity(buildErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(id).build();
+	}
 
 }
