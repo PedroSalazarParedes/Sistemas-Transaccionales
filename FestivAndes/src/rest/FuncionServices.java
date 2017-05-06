@@ -76,10 +76,10 @@ public class FuncionServices {
 
 	@PUT
 	@Path("/cancelarFuncion/{id: \\d+}")
-	public Response cancelar(@PathParam("id") Integer id) {
+	public Response cancelar(@PathParam("id") Long id, @PathParam("cliente") Integer c) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
-			master.cancelarFuncion(id);//TODO 
+			master.cancelarFuncion(id,c);//TODO 
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
@@ -87,15 +87,17 @@ public class FuncionServices {
 	}
 	
 	@GET
-	@Path("/asistencias/{cliente: \\d+}")
-	public Response asistenciasPorCliente(@PathParam("cliente") Integer id) {
+	@Path("/asistencias/{idUsuario: \\d+}")
+	@Produces({MediaType.TEXT_PLAIN})
+	public Response asistenciasPorCliente(@PathParam("idUsuario") Integer id,@PathParam("cliente") Integer cl) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
+		String s;
 		try {
-			master.asistenciasPorCliente(id);//TODO 
+			s=master.asistenciasPorCliente(id,cl);//TODO 
 		} catch (Exception e) {
 			return Response.status(500).entity(buildErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(id).build();
+		return Response.status(200).entity(s).build();
 	}
 
 }

@@ -143,13 +143,12 @@ public class FuncionDAO {
 	
 	public String masBoletas() throws SQLException, Exception {
 		
-		String sql =""; //EL STATEMENT ESTÁ MAL PERO LA IDEA ES QUE RETORNE EL ID DE LA FUNCION CON MAS BOLETAS"SELECT COUNT(ID_FUNCION) FROM ISIS2304B241710.BOLETA WHERE ID_FUNCION = ID_FUNCION "
+		String sql =""; //EL STATEMENT ESTA MAL PERO LA IDEA ES QUE RETORNE EL ID DE LA FUNCION CON MAS BOLETAS"SELECT COUNT(ID_FUNCION) FROM ISIS2304B241710.BOLETA WHERE ID_FUNCION = ID_FUNCION "
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		return rs.getString("ID_FUNCION");
 	}
-	
 	
 	
 	

@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import vos.Espectaculo;
 
@@ -228,7 +232,7 @@ public class ConsultasDAO {
 
 		while (rs.next()) {
 
-			s += "Id funciÃ³n: " + rs.getString("ID_FUNCION") + ", Fecha "
+			s += "Id funcion: " + rs.getString("ID_FUNCION") + ", Fecha "
 					+ rs.getString("HORA") + ", Realizado: "
 					+ rs.getString("REALIZADO") + ", Numero de asistentes: "
 					+ rs.getString("NUM_ASISTENTES") + ", Id lugar: "
@@ -239,5 +243,270 @@ public class ConsultasDAO {
 
 		}
 		return s;
+	}
+	
+	public String consultarAsistencia(int usuario) throws SQLException
+	{
+		//Consulta las funciones a las que asiste un cliente registrado de FestivAndes. 
+		//Debe discriminar las funciones ya realizadas
+		//o en curso, las funciones previstas
+		
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		String sql="";
+
+		sql = "SELECT * FROM ISIS2304B241710.BOLETA NATURAL INNER JOIN ((ISIS2304B241710.FUNCION NATURAL INNER JOIN LUGAR) NATURAL INNER JOIN ESPECTACULO)";
+		sql+=" WHERE id_usuario = "+usuario;
+		
+		String yaRealizadas ="";
+		String enCurso ="";
+		String previstas ="";
+		
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		while(rs.next())
+		{
+			Date date = rs.getDate("FECHA");
+			if(rs.getInt("REALIZADO")==1)
+			{
+				yaRealizadas+="-Id funcion: "+rs.getString("ID_FUNCION")+"\n"
+				            +" Fecha: "+formatter.format(date)+"\n"
+				            +" Espectaculo: "+rs.getString("NOMBRE_ESPECTACULO")+"\n"
+				            +" Lugar: "+rs.getString("NOMBRE_LUGAR")+"\n";
+			}
+			else
+			{
+				Calendar c = Calendar.getInstance();
+				Date hoy = c.getTime();
+				if(hoy.before(date))
+				{
+					previstas+="-Id funcion: "+rs.getString("ID_FUNCION")+"\n"
+		            +" Fecha: "+formatter.format(date)+"\n"
+		            +" Espectaculo: "+rs.getString("NOMBRE_ESPECTACULO")+"\n"
+		            +" Lugar: "+rs.getString("NOMBRE_LUGAR")+"\n";
+				}
+				else
+				{
+					enCurso+="-Id funcion: "+rs.getString("ID_FUNCION")+"\n"
+		            +" Fecha: "+formatter.format(date)+"\n"
+		            +" Espectaculo: "+rs.getString("NOMBRE_ESPECTACULO")+"\n"
+		            +" Lugar: "+rs.getString("NOMBRE_LUGAR")+"\n";
+				}
+			}
+
+
+		}
+
+		String fina = "Realizadas: \n"+yaRealizadas+"\n"
+				+"En curso: \n"+enCurso+"\n"
+				+"Previstas: \n"+previstas;
+
+		return fina;
+		
+	}
+	
+	public String consultarCompania(Integer idusuario) throws SQLException, Exception
+	{
+		String rta="";
+		if(esCompania(idusuario))
+		{
+			String sql="";
+
+			sql = "SELECT id_espectaculo, num_asistentes, SUM(valor) producido, (num_asistentes*100)/capacidad porcentaje"
+					+ " FROM ISIS2304B241710.BOLETA NATURAL INNER JOIN (((ISIS2304B241710.FUNCION NATURAL INNER JOIN ESPECTACULO) NATURAL INNER JOIN COMPANIA_TEATRO) NATURAL INNER JOIN LUGAR)";
+			sql+=" WHERE id_compania = "+idusuario;
+			sql+=" AND realizado = 1";
+			sql+=" GROUP BY id_espectaculo, num_asistentes, id_funcion, capacidad";
+			sql+=" ORDER BY id_espectaculo";
+			
+			PreparedStatement prepStmt = connection.prepareStatement(sql);
+			resources.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+			Long idesp=null;
+			String temp="";
+			double valor=0;
+
+			while(rs.next())
+			{
+				Long id = Long.parseLong(rs.getString("id_espectaculo"));
+				if(idesp==null )
+				{
+					idesp=id;
+					rta+="-Id espectaculo: "+rs.getString("id_espectaculo")+"\n"
+							+" Asistencia total: "+rs.getString("num_asistentes")+"\n"
+							+" Asistencia clientes registrados: "+darClientesRegistrados(id)+"\n"
+							+" Dinero generado en taquilla: ";
+					temp="";
+				}
+				else if(!idesp.equals(id))
+				{
+					idesp=id;
+					rta+=valor+"\n";
+					rta+=temp;
+					rta+="-Id espectaculo: "+rs.getString("id_espectaculo")+"\n"
+							+" Asistencia total: "+rs.getString("num_asistentes")+"\n"
+							+" Asistencia clientes registrados: "+darClientesRegistrados(id)+"\n"
+							+" Dinero generado en taquilla: ";
+					temp="";
+					valor=0;
+				}
+
+				temp+=" *Id funcion: "+rs.getString("ID_FUNCION")+"\n"
+						+"  Porcentaje de ocupación: " +rs.getString("porcentaje")+" % \n";
+
+				valor+=rs.getDouble("producido");
+			}
+		}
+		else if(esAdministrador(idusuario))
+		{
+			String sql="";
+
+			sql = "SELECT id_compania, nombre_compania, id_espectaculo, num_asistentes, SUM(valor) producido, (num_asistentes*100)/capacidad porcentaje"
+					+ " FROM ISIS2304B241710.BOLETA NATURAL INNER JOIN (((ISIS2304B241710.FUNCION NATURAL INNER JOIN ESPECTACULO) NATURAL INNER JOIN COMPANIA_TEATRO) NATURAL INNER JOIN LUGAR)";
+			sql+=" AND realizado = 1";
+			sql+=" GROUP BY id_compania, nombre_compania, id_espectaculo, num_asistentes, id_funcion, capacidad";
+			sql+=" ORDER BY id_compania, id_espectaculo";
+			
+			PreparedStatement prepStmt = connection.prepareStatement(sql);
+			resources.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+			Long idesp=null;
+			String idcomp = null;
+			String temp="";
+			double valor=0;
+
+			while(rs.next())
+			{
+				Long id = Long.parseLong(rs.getString("id_espectaculo"));
+				String com = rs.getString("id_compania");
+				String nombre = rs.getString("nombre_compania");
+				
+				if(idcomp==null)
+				{
+					idcomp=com;
+					rta+="NOMBRE DE LA COMPANIA: "+nombre+" - ID: "+com+"\n";
+				}
+				if(idesp==null)
+				{
+					idesp=id;
+					rta+="-Id espectaculo: "+rs.getString("id_espectaculo")+"\n"
+							+" Asistencia total: "+rs.getString("num_asistentes")+"\n"
+							+" Asistencia clientes registrados: "+darClientesRegistrados(id)+"\n"
+							+" Dinero generado en taquilla: ";
+					temp="";
+				}
+				else if(!idesp.equals(id) && idcomp.equals(com))
+				{
+					idesp=id;
+					rta+=valor+"\n";
+					rta+=temp;
+					rta+="-Id espectaculo: "+rs.getString("id_espectaculo")+"\n"
+							+" Asistencia total: "+rs.getString("num_asistentes")+"\n"
+							+" Asistencia clientes registrados: "+darClientesRegistrados(id)+"\n"
+							+" Dinero generado en taquilla: ";
+					temp="";
+					valor=0;
+				}
+				else if(!idesp.equals(id) && !idcomp.equals(com))
+				{
+					idesp=id;
+					rta+=valor+"\n";
+					rta+=temp;
+					rta+="\n";
+					rta+="NOMBRE DE LA COMPANIA: "+nombre+" - ID: "+com+"\n";
+					rta+="-Id espectaculo: "+rs.getString("id_espectaculo")+"\n"
+							+" Asistencia total: "+rs.getString("num_asistentes")+"\n"
+							+" Asistencia clientes registrados: "+darClientesRegistrados(id)+"\n"
+							+" Dinero generado en taquilla: ";
+					idcomp=com;
+					temp="";
+					valor=0;
+				}
+
+				temp+=" *Id funcion: "+rs.getString("ID_FUNCION")+"\n"
+						+"  Porcentaje de ocupación: " +rs.getString("porcentaje")+" % \n";
+
+				valor+=rs.getDouble("producido");
+			}
+		}
+		else
+		{
+			throw new Exception("El usuario no tiene autorización para realizar esta consulta");
+		}
+		
+		
+		
+		return rta;
+	}
+	
+	public int darClientesRegistrados(Long idespectaculo) throws SQLException
+	{
+		String sql="";
+
+		sql = "SELECT count(*) hola"
+				+ " FROM ISIS2304B241710.BOLETA NATURAL INNER JOIN (ISIS2304B241710.FUNCION NATURAL INNER JOIN ESPECTACULO)";
+		sql+=" WHERE id_espectaculo = "+idespectaculo;
+		sql+=" AND id_usuario IS NOT NULL";
+		
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		rs.next();
+		
+		return rs.getInt("hola");
+	}
+	
+	public boolean esCliente(Integer idusuario) throws SQLException
+	{
+		String sql="";
+
+		sql = "SELECT * FROM ISIS2304B241710.USUARIO";
+		sql+=" WHERE id_usuario = "+idusuario;
+
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		rs.next();
+		
+		return rs.getString("ROL").equals("Cliente");
+	}
+	
+	public boolean esAdministrador(Integer idusuario) throws SQLException
+	{
+		String sql="";
+
+		sql = "SELECT * FROM ISIS2304B241710.USUARIO";
+		sql+=" WHERE id_usuario = "+idusuario;
+
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		rs.next();
+		
+		return rs.getString("ROL").equals("Administrador");
+	}
+	
+	public boolean esCompania(Integer idusuario) throws SQLException
+	{
+		String sql="";
+
+		sql = "SELECT * FROM ISIS2304B241710.USUARIO";
+		sql+=" WHERE id_usuario = "+idusuario;
+
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		rs.next();
+		
+		return rs.getString("ROL").equals("Compania");
 	}
 }

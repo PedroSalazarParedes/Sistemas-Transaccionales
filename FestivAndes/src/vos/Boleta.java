@@ -46,33 +46,6 @@ public class Boleta
 	@JsonProperty(value="numsillaBoleta")
 	private Integer numsilla;
 
-	@JsonProperty(value="abonada")
-	private Boolean abonada;
-	
-	@JsonProperty(value="usuario")
-	private Integer usuario;
-	
-	
-	
-	public Integer getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(Integer usuario) {
-		this.usuario = usuario;
-	}
-
-
-	public Boolean getAbonada() {
-		return abonada;
-	}
-
-
-	public void setAbonada(Boolean abonada) {
-		this.abonada = abonada;
-	}
-
 
 	/**
 	 * Método constructor de la clase espectaculo
@@ -81,17 +54,16 @@ public class Boleta
 	 * @param valor - Nombre del vidfuncioneo. valor != null
 	 * @param realizado - Duración en minutos del vidfuncioneo.
 	 */
-	public Boleta(@JsonProperty(value="idBoleta")Long idfuncion, @JsonProperty(value="valorBoleta")double valor,
+	public Boleta(@JsonProperty(value="idfuncionBoleta")Long idfuncion, @JsonProperty(value="valorBoleta")double valor,
 			 @JsonProperty(value="idlocalidadBoleta") Long idlocalidad, @JsonProperty(value="numfilaBoleta") Integer numfila,
-			 @JsonProperty(value="numsillaBoleta") Integer numsilla,  @JsonProperty(value="abonada") Boolean abonada,  @JsonProperty(value="usuario") Integer usuario) {
+			 @JsonProperty(value="numsillaBoleta") Integer numsilla) {
 		super();
 		this.idfuncion = idfuncion;
 		this.valor = valor;
 		this.numsilla = numsilla;
 		this.idlocalidad = idlocalidad;
 		this.numfila = numfila;
-		this.abonada = abonada;
-		this.usuario = usuario;
+	
 	}
 	
 	

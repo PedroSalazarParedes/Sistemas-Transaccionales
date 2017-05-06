@@ -55,9 +55,9 @@ public class CompaniaServices {
 	}
 	
 	@GET
-	@Path("/info/{compania}")
+	@Path("/info/{idusuario}")
 	@Produces({MediaType.TEXT_PLAIN})
-	public Response consultarInfoCompania(@PathParam("compania")String compania) {
+	public Response consultarInfoCompania(@PathParam("idusuario")Integer compania) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		String s;
 		try {
