@@ -3,6 +3,7 @@ package tm;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -778,7 +779,7 @@ public class FestivAndesMaster {
 			}
 			else
 			{
-				throw new Exception("El usuario no está autorizado para hacer esta consulta.");
+				throw new Exception("El usuario no estï¿½ autorizado para hacer esta consulta.");
 			}
 			conn.commit();
 			return s;
@@ -863,7 +864,7 @@ public class FestivAndesMaster {
 			}
 			else
 			{
-				throw new Exception("Esta operación solo puede realizarse con 5 días o mas antes de la función.");
+				throw new Exception("Esta operaciï¿½n solo puede realizarse con 5 dï¿½as o mas antes de la funciï¿½n.");
 			}
 			conn.commit();
 
@@ -906,7 +907,7 @@ public class FestivAndesMaster {
 
 			if(dao.diasParaInicioFestival()<=21)
 			{
-				throw new Exception("Esta operación solo puede realizarse 3 semanas antes de que inicie el festival.");
+				throw new Exception("Esta operaciï¿½n solo puede realizarse 3 semanas antes de que inicie el festival.");
 			}
 			
 			for(BoletaDevolver b : abono)
@@ -942,7 +943,143 @@ public class FestivAndesMaster {
 		return s;
 	}
 	
+	//RFC9
+	
+	public String consultarAsistencia(int idCompania, Date fechaInicio, Date fechaFin, String criterio) throws SQLException , Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			
+			String f;
+			f = dao.consultarAsistencia(idCompania, fechaInicio, fechaFin, criterio);
+			conn.commit();
+			return f;
 
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	public String consultarAsistencia1(int idCompania, Date fechaInicio, Date fechaFin, String criterio) throws SQLException , Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			
+			String f;
+			f = dao.consultarAsistencia2(idCompania, fechaInicio, fechaFin, criterio);
+			conn.commit();
+			return f;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	public String consultarCompra(int idUsuario, Date fechaInicio, Date fechaFin, String elementos, String localidad, String franjaHoraria) throws Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			
+			String f;
+			f = dao.consultarCompra(idUsuario, fechaInicio, fechaFin, elementos, localidad, franjaHoraria);
+			conn.commit();
+			return f;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+
+	public String consultarBuenosClientes(int idUsuario, int n) throws SQLException, Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			
+			String f;
+			f = dao.consultarBuenosClientes(idUsuario, n);
+			conn.commit();
+			return f;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
 }
 
 	
