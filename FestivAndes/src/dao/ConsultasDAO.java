@@ -104,22 +104,22 @@ public class ConsultasDAO {
 
 		while (rs.next()) {
 			if (rs.getString("CLIENTE") == "0") {
-				str += "Id funciÃ³n: " + rs.getString("ID_FUNCION")
+				str += "Id funcion: " + rs.getString("ID_FUNCION")
 						+ ", Nombre lugar " + rs.getString("NOMBRE_LUGAR")
 						+ ", Usuario: No registrado, Valor producido: "
 						+ rs.getString("PRODUCIDO")
 						+ ", Numero de boletas vendidas: "
 						+ rs.getString("BOLETAS_VENDIDAS")
-						+ ", Porcentaje de ocupaciÃ³n: "
+						+ ", Porcentaje de ocupacion: "
 						+ rs.getString("porcentaje_ocupacion") + "\n";
 			} else {
-				str += "Id funciÃ³n: " + rs.getString("ID_FUNCION")
+				str += "Id funcion: " + rs.getString("ID_FUNCION")
 						+ ", Nombre lugar " + rs.getString("NOMBRE_LUGAR")
 						+ ", Usuario: Cliente, Valor producido: "
 						+ rs.getString("PRODUCIDO")
 						+ ", Numero de boletas vendidas: "
 						+ rs.getString("BOLETAS_VENDIDAS")
-						+ ", Porcentaje de ocupaciÃ³n: "
+						+ ", Porcentaje de ocupacion: "
 						+ rs.getString("porcentaje_ocupacion") + "\n";
 			}
 		}
@@ -203,7 +203,7 @@ public class ConsultasDAO {
 
 		while (rs.next()) {
 
-			s += "Id funciÃ³n: " + rs.getString("ID_FUNCION") + ", Fecha "
+			s += "Id funciOn: " + rs.getString("ID_FUNCION") + ", Fecha "
 					+ rs.getString("HORA") + ", Realizado: "
 					+ rs.getString("REALIZADO") + ", Numero de asistentes: "
 					+ rs.getString("NUM_ASISTENTES") + ", Id lugar: "
@@ -459,6 +459,8 @@ public class ConsultasDAO {
 		return rs.getInt("hola");
 	}
 	
+	
+	
 	public boolean esCliente(Integer idusuario) throws SQLException
 	{
 		String sql="";
@@ -508,5 +510,220 @@ public class ConsultasDAO {
 		rs.next();
 		
 		return rs.getString("ROL").equals("Compania");
+	}
+	
+	
+	public boolean esGerenteGeneral(Integer idusuario) throws SQLException
+	{
+		String sql="";
+
+		sql = "SELECT * FROM ISIS2304B241710.USUARIO";
+		sql+=" WHERE id_usuario = "+idusuario;
+
+
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		rs.next();
+		
+		return rs.getString("ROL").equals("Gerente");
+	}
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	///////////////RFC9. CONSULTAR ASISTENCIA A FESTIVANDES///////////////
+    //////////////////////////////////////////////////////////////////////
+	
+	//Se quiere conocer la información de los usuarios que asistieron
+	//al menos a una función de una determinada compañía en
+	//un rango de fechas. Los resultados deben ser clasificados 
+	//segun un criterio deseado por quien realiza la consulta. Debe
+	//ofrecerse la posibilidad de agrupamiento y ordenamiento de
+	//las respuestas según los intereses del usuario que consulta.
+	
+	public String consultarAsistencia(int idCompania, Date fechaInicio, Date fechaFin, String criterioOrdenamiento) throws SQLException
+	{
+		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+		String formatoI = dt1.format(fechaInicio);
+		String formatoF = dt1.format(fechaFin);
+		String sql = "SELECT id_usuario, nombre_usuario, email ";
+	    sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN realizado_por) ";
+		sql += "WHERE asistio =  1 ";	
+		sql += "AND id_usuario IS NOT NULL "; 
+		sql += "AND id_compania = "+idCompania;
+		sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
+		sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
+		sql += "GROUP BY id_usuario, nombre_usuario, email ";
+		if(criterioOrdenamiento!=null)
+		{
+			sql+="ORDER BY "+criterioOrdenamiento;
+		}
+		
+		String rta="";
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+		
+		while(rs.next())
+		{
+			rta+="Id: "+rs.getString("id_usuario")+", Nombre: "+rs.getString("nombre_usuario")+", Email: "+rs.getString("email")+"/n";
+		}
+		
+		return rta;
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	/////////RFC10. CONSULTAR ASISTENCIA A FESTIVANDES – RFC9-v2//////////
+	//////////////////////////////////////////////////////////////////////
+
+	//Se quiere conocer la información de los usuarios QUE NO 
+	//asistieron al menos a una función de una determinada compañía
+	//en un rango de fechas. Los resultados deben ser clasificados 
+	//según un criterio deseado por quien realiza la consulta. Debe
+	//ofrecerse la posibilidad de agrupamiento y ordenamiento de las 
+	//respuestas según los intereses del usuario que consulta.
+
+	public String consultarAsistencia2(int idCompania, Date fechaInicio, Date fechaFin, String criterioOrdenamiento) throws SQLException
+	{
+		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+		String formatoI = dt1.format(fechaInicio);
+		String formatoF = dt1.format(fechaFin);
+		String sql = "SELECT id_usuario, nombre_usuario, email ";
+		sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN realizado_por) ";
+		sql += "WHERE asistio =  0 ";	
+		sql += "AND id_usuario IS NOT NULL "; 
+		sql += "AND id_compania = "+idCompania;
+		sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
+		sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
+		sql += "GROUP BY id_usuario, nombre_usuario, email ";
+		if(criterioOrdenamiento!=null)
+		{
+			sql+="ORDER BY "+criterioOrdenamiento;
+		}
+
+		String rta="";
+		PreparedStatement prepStmt = connection.prepareStatement(sql);
+		resources.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while(rs.next())
+		{
+			rta+="Id: "+rs.getString("id_usuario")+", Nombre: "+rs.getString("nombre_usuario")+", Email: "+rs.getString("email")+"/n";
+		}
+
+		return rta;
+	}
+
+	//////////////////////////////////////////////////////////////////////
+	/////////////////RFC11. CONSULTAR COMPRAS DE BOLETAS//////////////////
+	//////////////////////////////////////////////////////////////////////
+
+	//Muestra la información de las boletas compradas por usuarios 
+	//de acuerdo con las características de las funciones
+	//correspondientes. Esta consulta puede ser filtrada por 
+	//diferentes conceptos (rangos de fecha, elementos del escenario,
+	//tipo de localidad, franja horaria y día de la semana) y se 
+	//espera como resultado: nombre del espectáculo, fecha de la
+	//función, sitio de la función, cantidad de boletas vendidas, 
+	//cantidad de usuarios registrados, entre otros. Esta operación es
+	//realizada el gerente general de FestivAndes.
+
+	public String consultarCompra(int idUsuario, Date fechaInicio, Date fechaFin, String elementos, String localidad, String franjaHoraria) throws Exception
+	{
+		if(esGerenteGeneral(idUsuario))
+		{
+			String sql = "SELECT nombre_espectaculo, id_espectaculo, fecha, nombre_lugar, count(*) boletas_vendidas ";
+			sql+="FROM boleta NATURAL INNER JOIN ((funcion NATURAL INNER JOIN espectaculo) NATURAL INNER JOIN lugar) ";
+			sql+="WHERE disponible = 0 ";
+			
+			if(fechaInicio!=null && fechaFin!=null)
+			{
+				SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+				String formatoI = dt1.format(fechaInicio);
+				String formatoF = dt1.format(fechaFin);
+
+				sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
+				sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
+			}
+			
+			if(elementos!=null)
+			{
+				String[] e = elementos.split(", ");
+				for(int i=0;i<e.length;i++)
+				{
+					sql+="AND condiciones_tecnicas LIKE '%"+e[i]+"%' ";
+				}
+			}
+			
+			if(localidad!=null)
+			{
+				sql+="AND nombre_localidad = '"+localidad+"' ";
+			}
+			
+			if(franjaHoraria!=null)
+			{
+				String hora[]=franjaHoraria.split("-");
+				
+				//DATEPART(HOUR, GETDATE());
+				//SELECT DATEPART(MINUTE, GETDATE());
+			}
+
+			String rta="";
+			PreparedStatement prepStmt = connection.prepareStatement(sql);
+			resources.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while(rs.next())
+			{
+				rta+="Nombre espectaculo: "+rs.getString("nombre_espectaculo")+", Fecha de la función: "+rs.getString("fecha")+", Sitio de la función: "+rs.getString("nombre_lugar")+
+					", Boletas vendidas: "+rs.getString("boletas_vendidas")+"/n";
+			}
+			//Falto dia semana y usuarios registrados
+
+			return rta;
+		}
+		else
+		{
+			throw new Exception("El usuario no tiene autorización para realizar esta consulta");
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////
+	/////////////////RFC12. CONSULTAR LOS BUENOS CLIENTES/////////////////
+	//////////////////////////////////////////////////////////////////////
+
+	//Los buenos clientes son aquellos que compran siempre en 
+	//localidad VIP y también son aquellos que compran al menos n
+	//boletas durante el festival. Esta consulta retorna toda la 
+	//informacion de dichos clientes. Esta operación es realizada
+	//únicamente por el gerente general de FestivAndes
+
+	public String consultarBuenosClientes(int idUsuario, int n) throws SQLException, Exception
+	{
+		if(esGerenteGeneral(idUsuario))
+		{
+			String sql = "SELECT id_usuario, nombre_usuario, email ";
+			sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN localidad) ";	
+			sql += "WHERE id_usuario IS NOT NULL "; 
+			sql += "GROUP BY id_usuario, nombre_usuario, email ";
+			sql += "HAVING count(*)>"+(n-1);
+
+			String rta="";
+			PreparedStatement prepStmt = connection.prepareStatement(sql);
+			resources.add(prepStmt);
+			ResultSet rs = prepStmt.executeQuery();
+
+			while(rs.next())
+			{
+				rta+="Id: "+rs.getString("id_usuario")+", Nombre: "+rs.getString("nombre_usuario")+", Email: "+rs.getString("email")+"/n";
+			}
+
+			return rta;
+		}
+		else
+		{
+			throw new Exception("El usuario no tiene autorización para realizar esta consulta");
+		}
 	}
 }
