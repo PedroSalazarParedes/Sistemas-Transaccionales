@@ -117,6 +117,107 @@ public class FestivAndesMaster {
 	////////////////////////////////////////
 	///////Transacciones////////////////////
 	////////////////////////////////////////
+	
+	
+	public Usuario darUsuario(Integer id) throws SQLException, Exception
+	{
+		UsuarioDAO dao = new UsuarioDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			Usuario u=dao.darUsuario(id);
+			conn.commit();
+			return u;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+	
+	public void agregarUsuarios()throws SQLException, Exception
+	{
+		UsuarioDAO dao = new UsuarioDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.agregarUsuarios();
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+	
+	public void agregarUsuarios(int num)throws SQLException, Exception
+	{
+		UsuarioDAO dao = new UsuarioDAO();
+		try 
+		{
+			//////Transacción
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			dao.agregarUsuarios(num);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
 	////////////////////////////////////////
 	///////Requerimientos///////////////////
 	////////////////////////////////////////
@@ -945,7 +1046,7 @@ public class FestivAndesMaster {
 	
 	//RFC9
 	
-	public String consultarAsistencia(int idCompania, Date fechaInicio, Date fechaFin, String criterio) throws SQLException , Exception {
+	public String consultarAsistencia(int idCompania, String fechaInicio, String fechaFin, String criterio) throws SQLException , Exception {
 		ConsultasDAO dao = new ConsultasDAO();
 		try 
 		{
@@ -979,7 +1080,7 @@ public class FestivAndesMaster {
 		}
 	}
 	
-	public String consultarAsistencia1(int idCompania, Date fechaInicio, Date fechaFin, String criterio) throws SQLException , Exception {
+	public String consultarAsistencia1(int idCompania, String fechaInicio, String fechaFin, String criterio) throws SQLException , Exception {
 		ConsultasDAO dao = new ConsultasDAO();
 		try 
 		{
@@ -1013,7 +1114,7 @@ public class FestivAndesMaster {
 		}
 	}
 	
-	public String consultarCompra(int idUsuario, Date fechaInicio, Date fechaFin, String elementos, String localidad, String franjaHoraria) throws Exception {
+	public String consultarCompra(int idUsuario, String fechaInicio, String fechaFin, String elementos, String localidad, String franjaHoraria, String dia) throws Exception {
 		ConsultasDAO dao = new ConsultasDAO();
 		try 
 		{
@@ -1022,7 +1123,7 @@ public class FestivAndesMaster {
 			dao.setConnection(conn);
 			
 			String f;
-			f = dao.consultarCompra(idUsuario, fechaInicio, fechaFin, elementos, localidad, franjaHoraria);
+			f = dao.consultarCompra(idUsuario, fechaInicio, fechaFin, elementos, localidad, franjaHoraria, dia);
 			conn.commit();
 			return f;
 
@@ -1057,6 +1158,41 @@ public class FestivAndesMaster {
 			
 			String f;
 			f = dao.consultarBuenosClientes(idUsuario, n);
+			conn.commit();
+			return f;
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				dao.closeResources();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+	}
+	
+	
+	public String consultarBuenosClientes() throws SQLException, Exception {
+		ConsultasDAO dao = new ConsultasDAO();
+		try 
+		{
+			//////Transaccion
+			this.conn = darConexion();
+			dao.setConnection(conn);
+			
+			String f;
+			f = dao.consultarBuenosClientes();
 			conn.commit();
 			return f;
 

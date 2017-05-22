@@ -530,6 +530,40 @@ public class ConsultasDAO {
 		return rs.getString("ROL").equals("Gerente");
 	}
 	
+	private int diaSemana(String dia)
+	{
+		if(dia.equalsIgnoreCase("lunes"))
+		{
+			return 1;
+		}
+		else if(dia.equalsIgnoreCase("martes"))
+		{
+			return 2;
+		}
+		else if(dia.equalsIgnoreCase("miercoles"))
+		{
+			return 3;
+		}
+		else if(dia.equalsIgnoreCase("jueves"))
+		{
+			return 4;
+		}
+		else if(dia.equalsIgnoreCase("viernes"))
+		{
+			return 5;
+		}
+		else if(dia.equalsIgnoreCase("sabado"))
+		{
+			return 6;
+		}
+		else if(dia.equalsIgnoreCase("domingo"))
+		{
+			return 7;
+		}
+
+		return 0;
+	}
+	
 	
 	//////////////////////////////////////////////////////////////////////
 	///////////////RFC9. CONSULTAR ASISTENCIA A FESTIVANDES///////////////
@@ -542,28 +576,34 @@ public class ConsultasDAO {
 	//ofrecerse la posibilidad de agrupamiento y ordenamiento de
 	//las respuestas según los intereses del usuario que consulta.
 	
-	public String consultarAsistencia(int idCompania, Date fechaInicio, Date fechaFin, String criterioOrdenamiento) throws SQLException
+	public String consultarAsistencia(int idCompania, String fechaInicio, String fechaFin, String criterioOrdenamiento) throws SQLException
 	{
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
-		String formatoI = dt1.format(fechaInicio);
-		String formatoF = dt1.format(fechaFin);
+		//SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+		//String formatoI = dt1.format(fechaInicio);
+		//String formatoF = dt1.format(fechaFin);
+		String formatoI = fechaInicio;
+		String formatoF = fechaFin;
 		String sql = "SELECT id_usuario, nombre_usuario, email ";
-	    sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN realizado_por) ";
+	    sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN (espectaculo NATURAL INNER JOIN realizado_por)) ";
 		sql += "WHERE asistio =  1 ";	
-		sql += "AND id_usuario IS NOT NULL "; 
+		//sql += "AND id_usuario IS NOT NULL "; 
 		sql += "AND id_compania = "+idCompania;
-		sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
-		sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
-		sql += "GROUP BY id_usuario, nombre_usuario, email ";
+		sql += " AND fecha BETWEEN TO_DATE('"+formatoI+"', 'YYYY/MM/DD') ";
+		sql += "AND TO_DATE('"+formatoF+"', 'YYYY/MM/DD') ";
+		sql += "GROUP BY id_usuario, nombre_usuario, email";
 		if(criterioOrdenamiento!=null)
 		{
-			sql+="ORDER BY "+criterioOrdenamiento;
+			sql+=" ORDER BY "+criterioOrdenamiento;
 		}
 		
 		String rta="";
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
+		long t1=System.currentTimeMillis();
 		ResultSet rs = prepStmt.executeQuery();
+		t1=(System.currentTimeMillis()-t1);
+		double mi = ((double)t1)/1000;
+		System.out.println("Tiempo de ejecución: "+ mi +" s");
 		
 		while(rs.next())
 		{
@@ -584,28 +624,34 @@ public class ConsultasDAO {
 	//ofrecerse la posibilidad de agrupamiento y ordenamiento de las 
 	//respuestas según los intereses del usuario que consulta.
 
-	public String consultarAsistencia2(int idCompania, Date fechaInicio, Date fechaFin, String criterioOrdenamiento) throws SQLException
+	public String consultarAsistencia2(int idCompania, String fechaInicio, String fechaFin, String criterioOrdenamiento) throws SQLException
 	{
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
-		String formatoI = dt1.format(fechaInicio);
-		String formatoF = dt1.format(fechaFin);
+		//SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+		//String formatoI = dt1.format(fechaInicio);
+		//String formatoF = dt1.format(fechaFin);
+		String formatoI = fechaInicio;
+		String formatoF = fechaFin;
 		String sql = "SELECT id_usuario, nombre_usuario, email ";
-		sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN realizado_por) ";
+		sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN (espectaculo NATURAL INNER JOIN realizado_por)) ";
 		sql += "WHERE asistio =  0 ";	
-		sql += "AND id_usuario IS NOT NULL "; 
+		//sql += "AND id_usuario IS NOT NULL "; 
 		sql += "AND id_compania = "+idCompania;
-		sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
-		sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
-		sql += "GROUP BY id_usuario, nombre_usuario, email ";
+		sql += " AND fecha BETWEEN TO_DATE('"+formatoI+"', 'YYYY/MM/DD') ";
+		sql += "AND TO_DATE('"+formatoF+"', 'YYYY/MM/DD') ";
+		sql += "GROUP BY id_usuario, nombre_usuario, email";
 		if(criterioOrdenamiento!=null)
 		{
-			sql+="ORDER BY "+criterioOrdenamiento;
+			sql+=" ORDER BY "+criterioOrdenamiento;
 		}
 
 		String rta="";
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		resources.add(prepStmt);
+		long t1=System.currentTimeMillis();
 		ResultSet rs = prepStmt.executeQuery();
+		t1=(System.currentTimeMillis()-t1);
+		double mi = ((double)t1)/1000;
+		System.out.println("Tiempo de ejecución: "+ mi +" s");
 
 		while(rs.next())
 		{
@@ -629,22 +675,24 @@ public class ConsultasDAO {
 	//cantidad de usuarios registrados, entre otros. Esta operación es
 	//realizada el gerente general de FestivAndes.
 
-	public String consultarCompra(int idUsuario, Date fechaInicio, Date fechaFin, String elementos, String localidad, String franjaHoraria) throws Exception
+	public String consultarCompra(int idUsuario, String fechaInicio, String fechaFin, String elementos, String localidad, String franjaHoraria, String diaSemana) throws Exception
 	{
 		if(esGerenteGeneral(idUsuario))
 		{
 			String sql = "SELECT nombre_espectaculo, id_espectaculo, fecha, nombre_lugar, count(*) boletas_vendidas ";
-			sql+="FROM boleta NATURAL INNER JOIN ((funcion NATURAL INNER JOIN espectaculo) NATURAL INNER JOIN lugar) ";
-			sql+="WHERE disponible = 0 ";
+			sql+="FROM boleta NATURAL INNER JOIN ((funcion NATURAL INNER JOIN LUGAR) NATURAL INNER JOIN espectaculo) ";
+			sql+="WHERE disponible = 0";
 			
 			if(fechaInicio!=null && fechaFin!=null)
 			{
-				SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
-				String formatoI = dt1.format(fechaInicio);
-				String formatoF = dt1.format(fechaFin);
+				//SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+				//String formatoI = dt1.format(fechaInicio);
+				//String formatoF = dt1.format(fechaFin);
+				String formatoI = fechaInicio;
+				String formatoF = fechaFin;
 
-				sql += "AND fecha > TO_DATE('"+formatoI+", 'YYYY/MM/DD') ";
-				sql += "AND fecha < TO_DATE('"+formatoF+", 'YYYY/MM/DD') ";
+				sql += " AND fecha BETWEEN TO_DATE('"+formatoI+"', 'YYYY/MM/DD') ";
+				sql += "AND TO_DATE('"+formatoF+"', 'YYYY/MM/DD')";
 			}
 			
 			if(elementos!=null)
@@ -652,34 +700,46 @@ public class ConsultasDAO {
 				String[] e = elementos.split(", ");
 				for(int i=0;i<e.length;i++)
 				{
-					sql+="AND condiciones_tecnicas LIKE '%"+e[i]+"%' ";
+					sql+=" AND condiciones_tecnicas LIKE '%"+e[i]+"%'";
 				}
 			}
 			
 			if(localidad!=null)
 			{
-				sql+="AND nombre_localidad = '"+localidad+"' ";
+				sql+=" AND nombre_lugar = '"+localidad+"'";
 			}
 			
 			if(franjaHoraria!=null)
 			{
 				String hora[]=franjaHoraria.split("-");
 				
+				sql+=" AND datepart(hour, fecha) BETWEEN "+hora[0]+" AND "+hora[1];
 				//DATEPART(HOUR, GETDATE());
 				//SELECT DATEPART(MINUTE, GETDATE());
 			}
+			
+			if(diaSemana!=null)
+			{
+				sql+=" AND datepart(dw, fecha) = "+diaSemana(diaSemana);
+			}
+			
+			sql+=" GROUP BY nombre_espectaculo, id_espectaculo, fecha, nombre_lugar";
 
 			String rta="";
 			PreparedStatement prepStmt = connection.prepareStatement(sql);
 			resources.add(prepStmt);
+			long t1=System.currentTimeMillis();
 			ResultSet rs = prepStmt.executeQuery();
+			t1=(System.currentTimeMillis()-t1);
+			double mi = ((double)t1)/1000;
+			System.out.println("Tiempo de ejecución: "+ mi +" s");
 
 			while(rs.next())
 			{
 				rta+="Nombre espectaculo: "+rs.getString("nombre_espectaculo")+", Fecha de la función: "+rs.getString("fecha")+", Sitio de la función: "+rs.getString("nombre_lugar")+
 					", Boletas vendidas: "+rs.getString("boletas_vendidas")+"/n";
 			}
-			//Falto dia semana y usuarios registrados
+			//Falto franja horaria y usuarios registrados
 
 			return rta;
 		}
@@ -705,18 +765,81 @@ public class ConsultasDAO {
 		{
 			String sql = "SELECT id_usuario, nombre_usuario, email ";
 			sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN localidad) ";	
-			sql += "WHERE id_usuario IS NOT NULL "; 
+			sql+=" WHERE nombre_localidad = 'VIP'";
 			sql += "GROUP BY id_usuario, nombre_usuario, email ";
 			sql += "HAVING count(*)>"+(n-1);
 
 			String rta="";
 			PreparedStatement prepStmt = connection.prepareStatement(sql);
 			resources.add(prepStmt);
+			long t1=System.currentTimeMillis();
 			ResultSet rs = prepStmt.executeQuery();
+			t1=(System.currentTimeMillis()-t1);
+			double mi = ((double)t1)/1000;
+			System.out.println("Tiempo de ejecución: "+ mi +" s");
 
 			while(rs.next())
 			{
 				rta+="Id: "+rs.getString("id_usuario")+", Nombre: "+rs.getString("nombre_usuario")+", Email: "+rs.getString("email")+"/n";
+			}
+
+			return rta;
+		}
+		else
+		{
+			throw new Exception("El usuario no tiene autorización para realizar esta consulta");
+		}
+	}
+	
+	
+	public String consultarBuenosClientes() throws SQLException, Exception
+	{
+		if(esGerenteGeneral(10500))
+		{
+			String sql = "SELECT id_usuario, nombre_usuario, email, nombre_localidad ";
+			sql += "FROM usuario NATURAL INNER JOIN ((boleta NATURAL INNER JOIN funcion) NATURAL INNER JOIN localidad) ";	
+			sql += "ORDER BY id_usuario";
+
+			String rta="";
+			PreparedStatement prepStmt = connection.prepareStatement(sql);
+			resources.add(prepStmt);
+			long t1=System.currentTimeMillis();
+			ResultSet rs = prepStmt.executeQuery();
+			t1=(System.currentTimeMillis()-t1);
+			double mi = ((double)t1)/1000;
+			System.out.println("Tiempo de ejecución: "+ mi +" s");
+			
+			String id= null;
+			String nombre =null;
+			String email=null;
+			int cont=0;
+			while(rs.next())
+			{
+				if(rs.getString("nombre_localidad").equals("VIP"))
+				{
+					if(id==null)
+					{
+						id=rs.getString("id_usuario");
+						nombre=rs.getString("nombre_usuario");
+						email=rs.getString("email");
+						cont++;
+					}
+					else if(id.equals(rs.getString("id_usuario")))
+					{
+						cont++;
+					}
+					else
+					{
+						if(cont>2)
+						{
+							rta+="Id: "+id+", Nombre: "+nombre+", Email: "+email+"/n";
+						}
+						id=rs.getString("id_usuario");
+						nombre=rs.getString("nombre_usuario");
+						email=rs.getString("email");
+						cont=0;
+					}
+				}				
 			}
 
 			return rta;
