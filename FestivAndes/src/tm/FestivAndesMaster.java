@@ -23,7 +23,7 @@ import vos.BoletaMultiple;
 import vos.CompaniaTeatro;
 import vos.Devolucion;
 import vos.Espectaculo;
-import vos.Funcion;
+import vos.Funcion1;
 import vos.ListaCompanias;
 import vos.ListaDevolucion;
 import vos.ListaEspectaculos;
@@ -370,7 +370,7 @@ public class FestivAndesMaster {
 	
 	//RF6
 	
-	public void addFuncion(Funcion fun, LocalidadesDetail det) throws Exception {
+	public void addFuncion(Funcion1 fun, LocalidadesDetail det) throws Exception {
 		FuncionDAO dao = new FuncionDAO();
 		LugarDAO dao2 = new LugarDAO();
 		try 
@@ -907,7 +907,7 @@ public class FestivAndesMaster {
 
 	}
 
-	public void registrarAbono(Integer usuario, List<Funcion> funciones, List<Localidad> localidades) throws SQLException, Exception 
+	public void registrarAbono(Integer usuario, List<Funcion1> funciones, List<Localidad> localidades) throws SQLException, Exception 
 	{
 		
 		BoletaDAO dao = new BoletaDAO();

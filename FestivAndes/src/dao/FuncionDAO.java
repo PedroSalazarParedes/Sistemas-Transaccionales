@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Funcion;
+import vos.Funcion1;
 
 public class FuncionDAO {
 
@@ -33,7 +33,7 @@ public class FuncionDAO {
 	}
 	
 
-	public void addFuncion(Funcion funcion) throws SQLException, Exception {
+	public void addFuncion(Funcion1 funcion) throws SQLException, Exception {
 
 		String sql = "INSERT INTO ISIS2304B241710.FUNCION VALUES (";
 		sql += funcion.getId() + ",'";
@@ -72,7 +72,7 @@ public class FuncionDAO {
 		
 	}
 	
-	public void addBoleta(Funcion espe, Double valor, int num) throws SQLException, Exception {
+	public void addBoleta(Funcion1 espe, Double valor, int num) throws SQLException, Exception {
 
 		Long idfuncion = espe.getId();
 		String n = "NULL";
@@ -97,7 +97,7 @@ public class FuncionDAO {
 	
 	}
 	
-	public void addBoletaLocalidad(Funcion espe, Double double1, int num, Long idlocalidad) throws SQLException, Exception
+	public void addBoletaLocalidad(Funcion1 espe, Double double1, int num, Long idlocalidad) throws SQLException, Exception
 	{
 		Long idfuncion = espe.getId();
 		String n = "NULL";
@@ -119,7 +119,7 @@ public class FuncionDAO {
 		prepStmt.executeQuery();
 	}
 	
-	public void addBoletaNumerada(Funcion espe, Double double1, int num, Long idlocalidad, int numfila, int numsilla)throws SQLException, Exception
+	public void addBoletaNumerada(Funcion1 espe, Double double1, int num, Long idlocalidad, int numfila, int numsilla)throws SQLException, Exception
 	{
 		Long idfuncion = espe.getId();
 		String n = "NULL";

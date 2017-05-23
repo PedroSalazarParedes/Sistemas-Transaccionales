@@ -8,5 +8,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Mariana/Downloads/wildfly-10.1.0.Final/modules/com/rabbitmq/main/amqp-client-3.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mariana/Downloads/wildfly-10.1.0.Final/modules/com/rabbitmq/main/geronimo-jms_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mariana/Downloads/wildfly-10.1.0.Final/modules/com/rabbitmq/main/rabbitmq-jms-1.6.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

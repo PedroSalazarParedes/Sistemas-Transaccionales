@@ -18,7 +18,7 @@ import vos.Boleta;
 import vos.BoletaDevolver;
 import vos.BoletaMultiple;
 import vos.Devolucion;
-import vos.Funcion;
+import vos.Funcion1;
 import vos.ListaDevolucion;
 import vos.Localidad;
 
@@ -76,7 +76,7 @@ public class BoletaServices {
 	
 	@POST
 	@Path("/abonos")
-	public Response registrarCompraAbono(List<Funcion> funciones, List<Localidad> localidades, @PathParam("idUsuario") int id) {
+	public Response registrarCompraAbono(List<Funcion1> funciones, List<Localidad> localidades, @PathParam("idUsuario") int id) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
 			master.registrarAbono(id,funciones, localidades);//TODO falta implementar el otro lado

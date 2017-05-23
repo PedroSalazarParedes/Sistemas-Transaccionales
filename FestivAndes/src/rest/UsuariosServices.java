@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 
 import tm.FestivAndesMaster;
 import vos.Boleta;
-import vos.Funcion;
+import vos.Funcion1;
 import vos.Localidad;
 import vos.Usuario;
 

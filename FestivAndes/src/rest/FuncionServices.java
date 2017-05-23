@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.FestivAndesMaster;
-import vos.Funcion;
+import vos.Funcion1;
 import vos.LocalidadesDetail;
 
 
@@ -33,7 +33,7 @@ public class FuncionServices {
 	}
 	
 	@POST
-	public Response addFuncion(Funcion f, LocalidadesDetail det) {
+	public Response addFuncion(Funcion1 f, LocalidadesDetail det) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
 			master.addFuncion(f, det);
@@ -44,7 +44,7 @@ public class FuncionServices {
 	}
 	@POST
 	@Path("/realizada")
-	public Response registrarRealizacion(Funcion f) {
+	public Response registrarRealizacion(Funcion1 f) {
 		FestivAndesMaster master = new FestivAndesMaster(getPath());
 		try {
 			master.registrarFuncionRealizada(f.getId());

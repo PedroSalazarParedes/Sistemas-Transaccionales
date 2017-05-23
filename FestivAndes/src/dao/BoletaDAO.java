@@ -12,7 +12,7 @@ import vos.Boleta;
 import vos.BoletaDevolver;
 import vos.BoletaMultiple;
 import vos.Devolucion;
-import vos.Funcion;
+import vos.Funcion1;
 import vos.Localidad;
 
 
@@ -117,7 +117,7 @@ public class BoletaDAO {
 		return devolucion;
 	}
 
-	public void registrarCompraAbono(Funcion f, Localidad l, int cliente ) throws Exception {
+	public void registrarCompraAbono(Funcion1 f, Localidad l, int cliente ) throws Exception {
 
 		if(!esCliente(cliente))
 		{
